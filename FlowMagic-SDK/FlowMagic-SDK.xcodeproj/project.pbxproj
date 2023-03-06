@@ -17,7 +17,18 @@
 		97F12D4229B44FF9009F74B3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F12D4129B44FF9009F74B3 /* Constants.swift */; };
 		97F12D4529B45018009F74B3 /* screenFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F12D4429B45018009F74B3 /* screenFlowModel.swift */; };
 		97F12D4829B45046009F74B3 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F12D4729B45046009F74B3 /* WebService.swift */; };
+		97F12D7829B56839009F74B3 /* endpointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F12D7729B56839009F74B3 /* endpointsTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		97F12D7929B56839009F74B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97F12D1F29B44EAD009F74B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 97F12D2629B44EAD009F74B3;
+			remoteInfo = "FlowMagic-SDK";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		97F12D2729B44EAD009F74B3 /* FlowMagic-SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FlowMagic-SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,10 +42,19 @@
 		97F12D4129B44FF9009F74B3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		97F12D4429B45018009F74B3 /* screenFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = screenFlowModel.swift; sourceTree = "<group>"; };
 		97F12D4729B45046009F74B3 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		97F12D7529B56839009F74B3 /* FlowMagic-SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FlowMagic-SDKTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		97F12D7729B56839009F74B3 /* endpointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = endpointsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		97F12D2429B44EAD009F74B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97F12D7229B56839009F74B3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -48,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				97F12D2929B44EAD009F74B3 /* FlowMagic-SDK */,
+				97F12D7629B56839009F74B3 /* FlowMagic-SDKTests */,
 				97F12D2829B44EAD009F74B3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				97F12D2729B44EAD009F74B3 /* FlowMagic-SDK.app */,
+				97F12D7529B56839009F74B3 /* FlowMagic-SDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,6 +147,22 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		97F12D7629B56839009F74B3 /* FlowMagic-SDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				97F12D7E29B56844009F74B3 /* EndPointTests */,
+				97F12D7729B56839009F74B3 /* endpointsTests.swift */,
+			);
+			path = "FlowMagic-SDKTests";
+			sourceTree = "<group>";
+		};
+		97F12D7E29B56844009F74B3 /* EndPointTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EndPointTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,6 +184,24 @@
 			productReference = 97F12D2729B44EAD009F74B3 /* FlowMagic-SDK.app */;
 			productType = "com.apple.product-type.application";
 		};
+		97F12D7429B56839009F74B3 /* FlowMagic-SDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97F12D7B29B56839009F74B3 /* Build configuration list for PBXNativeTarget "FlowMagic-SDKTests" */;
+			buildPhases = (
+				97F12D7129B56839009F74B3 /* Sources */,
+				97F12D7229B56839009F74B3 /* Frameworks */,
+				97F12D7329B56839009F74B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				97F12D7A29B56839009F74B3 /* PBXTargetDependency */,
+			);
+			name = "FlowMagic-SDKTests";
+			productName = "FlowMagic-SDKTests";
+			productReference = 97F12D7529B56839009F74B3 /* FlowMagic-SDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -158,6 +214,10 @@
 				TargetAttributes = {
 					97F12D2629B44EAD009F74B3 = {
 						CreatedOnToolsVersion = 14.1;
+					};
+					97F12D7429B56839009F74B3 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 97F12D2629B44EAD009F74B3;
 					};
 				};
 			};
@@ -175,6 +235,7 @@
 			projectRoot = "";
 			targets = (
 				97F12D2629B44EAD009F74B3 /* FlowMagic-SDK */,
+				97F12D7429B56839009F74B3 /* FlowMagic-SDKTests */,
 			);
 		};
 /* End PBXProject section */
@@ -186,6 +247,13 @@
 			files = (
 				97F12D3229B44EAE009F74B3 /* Preview Assets.xcassets in Resources */,
 				97F12D2F29B44EAE009F74B3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97F12D7329B56839009F74B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +297,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		97F12D7129B56839009F74B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97F12D7829B56839009F74B3 /* endpointsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		97F12D7A29B56839009F74B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 97F12D2629B44EAD009F74B3 /* FlowMagic-SDK */;
+			targetProxy = 97F12D7929B56839009F74B3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		97F12D3329B44EAE009F74B3 /* Debug */ = {
@@ -404,6 +488,42 @@
 			};
 			name = Release;
 		};
+		97F12D7C29B56839009F74B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WP95FZ7WFY;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Kedar.FlowMagic-SDKTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlowMagic-SDK.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FlowMagic-SDK";
+			};
+			name = Debug;
+		};
+		97F12D7D29B56839009F74B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WP95FZ7WFY;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Kedar.FlowMagic-SDKTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlowMagic-SDK.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FlowMagic-SDK";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -421,6 +541,15 @@
 			buildConfigurations = (
 				97F12D3629B44EAE009F74B3 /* Debug */,
 				97F12D3729B44EAE009F74B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97F12D7B29B56839009F74B3 /* Build configuration list for PBXNativeTarget "FlowMagic-SDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97F12D7C29B56839009F74B3 /* Debug */,
+				97F12D7D29B56839009F74B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
