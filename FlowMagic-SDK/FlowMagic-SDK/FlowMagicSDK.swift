@@ -57,7 +57,7 @@ class ScreenFlowProvider: ScreenFlowProviding {
         return screens
     }
 
-    func getdestinationViewsFromPorts() -> [String: AnyView?] {
+    func getDestinationViewsFromPorts() -> [String: AnyView?] {
         return destinationViewsFromPorts
     }
 
