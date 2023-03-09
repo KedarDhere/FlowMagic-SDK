@@ -5,9 +5,9 @@ name: Swift
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "mock-server-integration" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "mock-server-integration" ]
 
 jobs:
   build:
