@@ -1,4 +1,4 @@
-public struct FlowMagic_SDK {
+public struct FlowMagicSDK {
     public private(set) var text = "Hello, World!"
 
     public init() {
