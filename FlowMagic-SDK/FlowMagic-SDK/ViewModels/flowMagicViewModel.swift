@@ -26,7 +26,7 @@ class FlowMagicViewModel: ObservableObject {
         do {
             let screenFlowModel = try await service.loadUrlData(resource: Constants.Urls.applicationScreenFlow)
             print(screenFlowModel)
-            screenFlowModel.renderDestinationView(portName: "Home.Login")
+            screenFlowModel.renderDestinationView()
             destinationViewsFromPorts = ScreenFlowProvider.shared.getDestinationViewsFromPorts()
         } catch {
             print(error)

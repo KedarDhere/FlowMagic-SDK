@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		973B7F3429CED8C700E60272 /* MockScreenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973B7F3329CED8C700E60272 /* MockScreenProvider.swift */; };
+		973B7F3729CEDA1D00E60272 /* MockScreenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973B7F3329CED8C700E60272 /* MockScreenProvider.swift */; };
+		975F596329CE9F1900A3BF4F /* ScreenFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975F596229CE9F1900A3BF4F /* ScreenFlowTests.swift */; };
+		975F596529CE9F6700A3BF4F /* screenFlowTestData.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 975F596429CE9F6700A3BF4F /* screenFlowTestData.geojson */; };
 		97F12D2B29B44EAD009F74B3 /* FlowMagic_SDKApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F12D2A29B44EAD009F74B3 /* FlowMagic_SDKApp.swift */; };
 		97F12D2D29B44EAD009F74B3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F12D2C29B44EAD009F74B3 /* ContentView.swift */; };
 		97F12D2F29B44EAE009F74B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97F12D2E29B44EAE009F74B3 /* Assets.xcassets */; };
@@ -31,6 +35,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		973B7F3329CED8C700E60272 /* MockScreenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScreenProvider.swift; sourceTree = "<group>"; };
+		975F596229CE9F1900A3BF4F /* ScreenFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlowTests.swift; sourceTree = "<group>"; };
+		975F596429CE9F6700A3BF4F /* screenFlowTestData.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = screenFlowTestData.geojson; sourceTree = "<group>"; };
 		97F12D2729B44EAD009F74B3 /* FlowMagic-SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FlowMagic-SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97F12D2A29B44EAD009F74B3 /* FlowMagic_SDKApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagic_SDKApp.swift; sourceTree = "<group>"; };
 		97F12D2C29B44EAD009F74B3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +71,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		975F596129CE9EF400A3BF4F /* ScreenFlowTests */ = {
+			isa = PBXGroup;
+			children = (
+				975F596229CE9F1900A3BF4F /* ScreenFlowTests.swift */,
+				975F596429CE9F6700A3BF4F /* screenFlowTestData.geojson */,
+				973B7F3329CED8C700E60272 /* MockScreenProvider.swift */,
+			);
+			path = ScreenFlowTests;
+			sourceTree = "<group>";
+		};
 		97F12D1E29B44EAD009F74B3 = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +167,7 @@
 		97F12D7629B56839009F74B3 /* FlowMagic-SDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				975F596129CE9EF400A3BF4F /* ScreenFlowTests */,
 				97F12D7E29B56844009F74B3 /* EndPointTests */,
 				97F12D7729B56839009F74B3 /* endpointsTests.swift */,
 			);
@@ -254,6 +272,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				975F596529CE9F6700A3BF4F /* screenFlowTestData.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +309,7 @@
 				97F12D3929B44F57009F74B3 /* FlowMagicSDK.swift in Sources */,
 				97F12D4829B45046009F74B3 /* WebService.swift in Sources */,
 				97F12D3F29B44FCF009F74B3 /* View+Extension.swift in Sources */,
+				973B7F3429CED8C700E60272 /* MockScreenProvider.swift in Sources */,
 				97F12D2D29B44EAD009F74B3 /* ContentView.swift in Sources */,
 				97F12D4529B45018009F74B3 /* screenFlowModel.swift in Sources */,
 				97F12D2B29B44EAD009F74B3 /* FlowMagic_SDKApp.swift in Sources */,
@@ -302,6 +322,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				97F12D7829B56839009F74B3 /* endpointsTests.swift in Sources */,
+				973B7F3729CEDA1D00E60272 /* MockScreenProvider.swift in Sources */,
+				975F596329CE9F1900A3BF4F /* ScreenFlowTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,12 +20,12 @@ class ScreenFlowProvider: ScreenFlowProviding {
 
     // MARK: - Properties
 
-    private var screens: [String: (view: AnyView, portNames: [String])]
-    private var destinationViewsFromPorts: [String: AnyView?]
+    var screens: [String: (view: AnyView, portNames: [String])]
+    var destinationViewsFromPorts: [String: AnyView?]
 
     // MARK: - Initialization
 
-    private init() {
+    init() {
         screens = [:]
         destinationViewsFromPorts = [:]
     }

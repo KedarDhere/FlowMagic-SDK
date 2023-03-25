@@ -28,4 +28,37 @@ class Webservice {
         print(screenData)
         return screenData
     }
+
+    func loadMockData() -> ScreenFlowModel? {
+        let mockScreenFlowData = """
+        {
+            "applicationId": "66ceb688a2b311eda8fc0242ac120002",
+            "applicationScreenFlow": [
+              {
+                "screenName": "Home",
+                "portName": "Home.RandomPage",
+                "destinationView": "RandomPage"
+              },
+              {
+                "screenName": "Login",
+                "portName": "Home.Login",
+                "destinationView": "SignUp"
+              },
+              {
+                "screenName": "SignUp",
+                "portName": "Home.SignUp",
+                "destinationView": "RandomPage"
+              }
+            ]
+        }
+        """.data(using: .utf8)!
+        do {
+            let decoder = JSONDecoder()
+            let screenFlowData = try decoder.decode(ScreenFlowModel.self, from: mockScreenFlowData)
+            return screenFlowData
+        } catch {
+            print(error)
+        }
+        return nil
+    }
 }

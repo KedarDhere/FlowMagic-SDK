@@ -27,7 +27,7 @@ struct ScreenFlowModel: Decodable {
 
 extension ScreenFlowModel {
 
-    func renderDestinationView(portName: String) {
+    func renderDestinationView() {
         var destinationView: AnyView = ProgressView().toAnyView()
         let screens = ScreenFlowProvider.shared.getScreens()
         for screenInfo in self.applicationScreenFlow {
