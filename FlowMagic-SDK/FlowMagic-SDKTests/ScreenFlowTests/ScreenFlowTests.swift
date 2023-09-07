@@ -9,140 +9,171 @@ import XCTest
 import SwiftUI
 @testable import FlowMagic_SDK
 
-class MockScreenProvider: ScreenFlowProviding {
+func propertiesAreEqual(_ lhs: Any, _ rhs: Any) -> Bool {
+    let lhsMirror = Mirror(reflecting: lhs)
+    let rhsMirror = Mirror(reflecting: rhs)
 
-    // MARK: - Properties
-
-    var screens: [String: (view: AnyView, portNames: [String])]
-    var destinationViewsFromPorts: [String: AnyView?]
-
-    // MARK: - Initialization
-
-    init() {
-        screens = [:]
-        destinationViewsFromPorts = [:]
+    for (lhsChild, rhsChild) in zip(lhsMirror.children, rhsMirror.children) {
+        guard "\(lhsChild.value)" == "\(rhsChild.value)" else { return false }
     }
-
-    func registerScreen(screenName: String, portNames: [String], view: any View) {
-        guard screens[screenName] == nil else {
-            return
-        }
-
-        screens[screenName] = (AnyView(view), portNames)
-    }
-
-    func addConnection(fromPort: String, toScreen: String) {
-        guard let view = screens[toScreen]?.view else {
-            fatalError("Value of screen is nil")
-        }
-
-        let portName = fromPort + "." + toScreen
-        destinationViewsFromPorts[portName] = view
-    }
-
-    func getDestinationScreen(portName: String) -> any View {
-        return destinationViewsFromPorts[portName]
-    }
-
-    func getScreens() -> [String: (view: AnyView, portNames: [String])] {
-        return screens
-    }
-
-    func getDestinationViewsFromPorts() -> [String: AnyView?] {
-        return destinationViewsFromPorts
-    }
-
-    func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView) {
-        destinationViewsFromPorts[portName] = destinationView
-    }
+    return true
 }
 
-class MockFlowMagicViewModel: FlowMagicViewModel {
-
-    private var service: Webservice
-    var mockScreenProvider = MockScreenProvider()
-
-    // MARK: Initialization
-    // MARK: Initialization
-    override init(service: Webservice) {
-        self.service = service
-        super.init(service: Webservice())
-    }
-
-    override func load() async {
-//        let mockScreenFlowData = """
-//        {
-//            "applicationId": "66ceb688a2b311eda8fc0242ac120002",
-//            "applicationScreenFlow": [
-//              {
-//                "screenName": "Home",
-//                "portName": "Home.RandomPage",
-//                "destinationView": "RandomPage"
-//              },
-//              {
-//                "screenName": "Login",
-//                "portName": "Home.Login",
-//                "destinationView": "SignUp"
-//              },
-//              {
-//                "screenName": "SignUp",
-//                "portName": "Home.SignUp",
-//                "destinationView": "RandomPage"
-//              }
-//            ]
-//        }
-//        """.data(using: .utf8)!
-//
-//        let decoder = JSONDecoder()
-        do {
-//            let screenFlowData = try decoder.decode(ScreenFlowModel.self, from: mockScreenFlowData)
-            let screenFlowData = try service.loadMockData()
-            var destinationView: AnyView = ProgressView().toAnyView()
-            for screen in screenFlowData!.applicationScreenFlow {
-                let screenInfo = mockScreenProvider.screens[screen.destinationView]
-                destinationView = screenInfo!.0
-                mockScreenProvider.updateDestinationViewsFromPorts(
-                    portName: screen.portName, destinationView: destinationView
-                )
-            }
-        } catch {
-            print(error)
-        }
-    }
-}
-
-final class ScreenFlowTests: XCTestCase {
-    func test1() {
-
-        var destinationViewsFromPorts: [String: any View] = [:]
-
-        destinationViewsFromPorts = [
-            "Home.SignUp": RandomPage()
-        ]
-
-        let actual = destinationViewsFromPorts["Home.SignUp"]
-    //    let expected = AnyView(RandomPage())
-        actual is SignUp
-    }
-
-    @MainActor func test2() {
+class ScreenFlowTests: XCTestCase {
+     // Test Register Screen and Get Screen
+    func testRegisterScreens() {
+        // Given
         let mockScreenFlowProvider = MockScreenProvider()
-        let mockScreenFlowViewModel = MockFlowMagicViewModel(service: Webservice())
+        let screenName = "Home"
+        let portNames = ["Login", "SignUp"]
+        let view = AnyView(Home())
 
-        mockScreenFlowProvider.registerScreen(screenName: "Home", portNames: ["SignUp", "Login", "RandomPage"], view: Home())
-        mockScreenFlowProvider.registerScreen(screenName: "SignUp", portNames: [], view: SignUp())
-        mockScreenFlowProvider.registerScreen(screenName: "Login", portNames: [], view: Login())
-        mockScreenFlowProvider.registerScreen(screenName: "RandomPage", portNames: [], view: RandomPage())
-        
-        mockScreenFlowProvider.addConnection(fromPort: "Home", toScreen: "SignUp")
-        mockScreenFlowProvider.addConnection(fromPort: "Home", toScreen: "Login")
-        mockScreenFlowProvider.addConnection(fromPort: "Home", toScreen: "RandomPage")
+        // When
+        mockScreenFlowProvider.registerScreen(screenName: screenName, portNames: portNames, view: view)
 
-        let actual = mockScreenFlowProvider.getDestinationScreen(portName: "Home.SignUp")
-        let expected = SignUp()
-
-        actual is SignUp
-
+        // Then
+        let expectedOutput = mockScreenFlowProvider.getScreens()
+        XCTAssertNotNil(expectedOutput[screenName], "Screen with name \(screenName) not found.")
+        XCTAssertEqual(expectedOutput[screenName]?.1, portNames,
+                       "Screen's portNames are different than the input portnames")
     }
 
+    // Test if screen Name is blank while registering the screens
+    func testOverwriteScreen() {
+        // Given
+        let mockScreenFlowProvider = MockScreenProvider()
+        let screenName = "Home"
+        let initialPortNames = ["Login", "SignUp"]
+        let overwrittenPortNames = ["Login", "SignUp", "AnotherPage"]
+        let view = AnyView(Home())
+
+        // Register the screen initially
+        mockScreenFlowProvider.registerScreen(screenName: screenName, portNames: initialPortNames, view: view)
+
+        // Try overwriting the screen
+        mockScreenFlowProvider.registerScreen(screenName: screenName, portNames: overwrittenPortNames, view: view)
+
+        // Then
+        let screenInfo = mockScreenFlowProvider.getScreens()[screenName]
+        XCTAssertNotNil(screenInfo)
+        XCTAssertEqual(screenInfo?.1, initialPortNames)
+    }
+
+    // Test Adding Connections
+    func testAddConnections() {
+        // Given
+        let mockScreenFlowProvider = MockScreenProvider()
+        let homeScreen = "Home"
+        let homeScrPortNames = ["Login", "SignUp"]
+        let home = AnyView(Home())
+
+        let signUpScreen = "SignUp"
+        let signUpScrPortNames = [String()]
+        let signUp = AnyView(SignUp())
+
+        let portName = "Home.SignUp"
+
+        // Register the screen initially
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScrPortNames, view: home)
+        mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: signUpScrPortNames, view: signUp)
+
+        // When
+        mockScreenFlowProvider.addConnection(fromPort: "Home", toScreen: "SignUp")
+
+        // Then
+        let expectedOutput = mockScreenFlowProvider.getDestinationScreen(portName: portName)
+        XCTAssertNotNil(expectedOutput, "PortNames are not added as expected")
+    }
+
+    // Add connection prior to registering the screen
+    func testAddConnectionWithNoRegistration() {
+        // Given
+        let mockScreenFlowProvider = MockScreenProvider()
+        let homeScreen = "Home"
+        let homeScrPortNames = ["Login", "SignUp"]
+        let home = AnyView(Home())
+        let mockErrorHandler = MockHandleFatalError()
+        mockScreenFlowProvider.mockErrorHandler = mockErrorHandler
+
+        // Register only the Home screen
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScrPortNames, view: home)
+
+        // When
+        mockScreenFlowProvider.addConnection(fromPort: "Home", toScreen: "SignUp")
+
+        // Then
+        XCTAssertTrue(mockErrorHandler.didHandleFatalError)
+        XCTAssertEqual(mockErrorHandler.errorMessage, "Value of screen is nil")
+    }
+
+    // Test Screen Flow updation
+    func testUpdateScreenFlow() {
+        // Given
+        let mockScreenFlowProvider = MockScreenProvider()
+        let homeScreen = "Home"
+        let homeScrPortNames = ["SignUp"]
+        let homeView = AnyView(Home())
+
+        let signUpScreen = "SignUp"
+        let signUpScrPortNames = [String()]
+        let signUpView = AnyView(SignUp())
+
+        let loginScreen = "Login"
+        let loginScrPortNames = [String()]
+        let loginView = AnyView(Login())
+
+        // Register Home and Sign Up screens
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScrPortNames, view: homeView)
+        mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: signUpScrPortNames, view: signUpView)
+        mockScreenFlowProvider.registerScreen(screenName: loginScreen, portNames: loginScrPortNames, view: loginView)
+
+        // Add Connection
+        mockScreenFlowProvider.addConnection(fromPort: homeScreen, toScreen: signUpScreen)
+
+        // When
+        mockScreenFlowProvider.updateDestinationViewsFromPorts(
+            portName: "Home.SignUp",
+            destinationView: AnyView(Login()))
+
+        // Then
+        let expectedOutput = mockScreenFlowProvider.getDestinationScreen(portName: "Home.SignUp")
+        let actualOutput = AnyView(Login())
+        XCTAssertTrue(propertiesAreEqual(expectedOutput, actualOutput))
+    }
+
+    // Test the viewModel
+    @MainActor func testViewModel() async {
+        // Given
+        let mockScreenFlowProvider = MockScreenProvider()
+        let viewModel = FlowMagicViewModel(service: MockWebService(), screenFlowProvider: mockScreenFlowProvider)
+
+        let homeScreen = "Home"
+        let homeScrPortNames = ["SignUp"]
+        let homeView = AnyView(Home())
+
+        let signUpScreen = "SignUp"
+        let signUpScrPortNames = [String()]
+        let signUpView = AnyView(SignUp())
+
+        let loginScreen = "Login"
+        let loginScrPortNames = [String()]
+        let loginView = AnyView(Login())
+
+        // Register Home and Sign Up screens
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScrPortNames, view: homeView)
+        mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: signUpScrPortNames, view: signUpView)
+        mockScreenFlowProvider.registerScreen(screenName: loginScreen, portNames: loginScrPortNames, view: loginView)
+
+        mockScreenFlowProvider.addConnection(fromPort: homeScreen, toScreen: signUpScreen)
+        mockScreenFlowProvider.registerScreen(screenName: loginScreen, portNames: [], view: Login())
+        mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: [], view: SignUp())
+
+        // When
+        await viewModel.load()
+
+        // Then
+        let expectedOutput = mockScreenFlowProvider.getDestinationScreen(portName: "Home.Login")
+        let actualOutput = AnyView(SignUp())
+        XCTAssertTrue(propertiesAreEqual(expectedOutput, actualOutput))
+    }
 }

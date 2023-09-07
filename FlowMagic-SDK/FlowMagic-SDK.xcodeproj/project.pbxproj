@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		973B7F3429CED8C700E60272 /* MockScreenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973B7F3329CED8C700E60272 /* MockScreenProvider.swift */; };
 		973B7F3729CEDA1D00E60272 /* MockScreenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973B7F3329CED8C700E60272 /* MockScreenProvider.swift */; };
 		975F596329CE9F1900A3BF4F /* ScreenFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975F596229CE9F1900A3BF4F /* ScreenFlowTests.swift */; };
-		975F596529CE9F6700A3BF4F /* screenFlowTestData.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 975F596429CE9F6700A3BF4F /* screenFlowTestData.geojson */; };
+		975F596529CE9F6700A3BF4F /* screenFlowTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = 975F596429CE9F6700A3BF4F /* screenFlowTestData.json */; };
+		97C981C02AA64239004CFEF8 /* MockWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C981BF2AA64239004CFEF8 /* MockWebService.swift */; };
 		97F12D2B29B44EAD009F74B3 /* FlowMagic_SDKApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F12D2A29B44EAD009F74B3 /* FlowMagic_SDKApp.swift */; };
 		97F12D2D29B44EAD009F74B3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F12D2C29B44EAD009F74B3 /* ContentView.swift */; };
 		97F12D2F29B44EAE009F74B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97F12D2E29B44EAE009F74B3 /* Assets.xcassets */; };
@@ -21,7 +21,6 @@
 		97F12D4229B44FF9009F74B3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F12D4129B44FF9009F74B3 /* Constants.swift */; };
 		97F12D4529B45018009F74B3 /* screenFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F12D4429B45018009F74B3 /* screenFlowModel.swift */; };
 		97F12D4829B45046009F74B3 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F12D4729B45046009F74B3 /* WebService.swift */; };
-		97F12D7829B56839009F74B3 /* endpointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F12D7729B56839009F74B3 /* endpointsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +36,8 @@
 /* Begin PBXFileReference section */
 		973B7F3329CED8C700E60272 /* MockScreenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScreenProvider.swift; sourceTree = "<group>"; };
 		975F596229CE9F1900A3BF4F /* ScreenFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlowTests.swift; sourceTree = "<group>"; };
-		975F596429CE9F6700A3BF4F /* screenFlowTestData.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = screenFlowTestData.geojson; sourceTree = "<group>"; };
+		975F596429CE9F6700A3BF4F /* screenFlowTestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = screenFlowTestData.json; sourceTree = "<group>"; };
+		97C981BF2AA64239004CFEF8 /* MockWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWebService.swift; sourceTree = "<group>"; };
 		97F12D2729B44EAD009F74B3 /* FlowMagic-SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FlowMagic-SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97F12D2A29B44EAD009F74B3 /* FlowMagic_SDKApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagic_SDKApp.swift; sourceTree = "<group>"; };
 		97F12D2C29B44EAD009F74B3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,7 +50,6 @@
 		97F12D4429B45018009F74B3 /* screenFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = screenFlowModel.swift; sourceTree = "<group>"; };
 		97F12D4729B45046009F74B3 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		97F12D7529B56839009F74B3 /* FlowMagic-SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FlowMagic-SDKTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		97F12D7729B56839009F74B3 /* endpointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = endpointsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +74,9 @@
 			isa = PBXGroup;
 			children = (
 				975F596229CE9F1900A3BF4F /* ScreenFlowTests.swift */,
-				975F596429CE9F6700A3BF4F /* screenFlowTestData.geojson */,
+				975F596429CE9F6700A3BF4F /* screenFlowTestData.json */,
 				973B7F3329CED8C700E60272 /* MockScreenProvider.swift */,
+				97C981BF2AA64239004CFEF8 /* MockWebService.swift */,
 			);
 			path = ScreenFlowTests;
 			sourceTree = "<group>";
@@ -168,17 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				975F596129CE9EF400A3BF4F /* ScreenFlowTests */,
-				97F12D7E29B56844009F74B3 /* EndPointTests */,
-				97F12D7729B56839009F74B3 /* endpointsTests.swift */,
 			);
 			path = "FlowMagic-SDKTests";
-			sourceTree = "<group>";
-		};
-		97F12D7E29B56844009F74B3 /* EndPointTests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = EndPointTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,7 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				975F596529CE9F6700A3BF4F /* screenFlowTestData.geojson in Resources */,
+				975F596529CE9F6700A3BF4F /* screenFlowTestData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +300,6 @@
 				97F12D3929B44F57009F74B3 /* FlowMagicSDK.swift in Sources */,
 				97F12D4829B45046009F74B3 /* WebService.swift in Sources */,
 				97F12D3F29B44FCF009F74B3 /* View+Extension.swift in Sources */,
-				973B7F3429CED8C700E60272 /* MockScreenProvider.swift in Sources */,
 				97F12D2D29B44EAD009F74B3 /* ContentView.swift in Sources */,
 				97F12D4529B45018009F74B3 /* screenFlowModel.swift in Sources */,
 				97F12D2B29B44EAD009F74B3 /* FlowMagic_SDKApp.swift in Sources */,
@@ -321,7 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97F12D7829B56839009F74B3 /* endpointsTests.swift in Sources */,
+				97C981C02AA64239004CFEF8 /* MockWebService.swift in Sources */,
 				973B7F3729CEDA1D00E60272 /* MockScreenProvider.swift in Sources */,
 				975F596329CE9F1900A3BF4F /* ScreenFlowTests.swift in Sources */,
 			);
