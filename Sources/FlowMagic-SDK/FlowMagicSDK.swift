@@ -39,8 +39,7 @@ protocol ScreenFlowProviding {
 
 class ScreenFlowProvider: ScreenFlowProviding {
 
-//    static var shared = ScreenFlowProvider(errorHandler: ProductionHandleFatalError())
-    static var shared = ScreenFlowProvider(errorHandle: ProductionHandleFatalError())
+    static let shared = ScreenFlowProvider(errorHandle: ProductionHandleFatalError())
     let errorHandle: ErrorHandlerProtocol
 
     // MARK: - Properties

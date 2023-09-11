@@ -22,17 +22,55 @@ private extension URLResponse {
     }
 }
 
+protocol NetworkSession {
+    func loadData(from url: URL) async throws -> (Data, HTTPURLResponse)
+}
+
+extension URLSession: NetworkSession {
+    func loadData(from url: URL) async throws -> (Data, HTTPURLResponse) {
+        let (data, response) = try await self.data(from: url)
+        if let httpResponse = response as? HTTPURLResponse {
+            return (data, httpResponse)
+        } else {
+            throw NetworkError.invalidServerResponse
+        }
+
+    }
+}
+
+class MockNetworkSession: NetworkSession {
+    var mockData: Data?
+    var mockResponse: HTTPURLResponse?
+    var mockError: Error?
+
+    func loadData(from url: URL) async throws -> (Data, HTTPURLResponse) {
+        if let error = mockError {
+            throw error
+        }
+        guard let data = mockData, let response = mockResponse else {
+            throw NetworkError.invalidServerResponse
+        }
+        return (data, response)
+    }
+}
+
 protocol WebService {
     func loadUrlData(resource: String) async throws -> ScreenFlowModel
 }
 
 class WebServiceImpl: WebService {
+    private let networkSession: NetworkSession
+
+    init(networkSession: NetworkSession = URLSession.shared) {
+        self.networkSession = networkSession
+    }
+
     func loadUrlData(resource: String) async throws -> ScreenFlowModel {
         guard let url = URL(string: resource) else {
             throw NetworkError.invalidUrl
         }
 
-        let (data, response) = try await URLSession.shared.data(from: url)
+        let (data, response) = try await networkSession.loadData(from: url)
 
         if !response.isSuccessful {
             throw NetworkError.invalidServerResponse

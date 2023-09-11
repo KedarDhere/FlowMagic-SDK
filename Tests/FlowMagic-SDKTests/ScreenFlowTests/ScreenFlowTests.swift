@@ -181,4 +181,47 @@ class ScreenFlowTests: XCTestCase {
         let actualOutput = AnyView(SignUp())
         XCTAssertTrue(propertiesAreEqual(expectedOutput, actualOutput))
     }
+
+    /// Tests the Web service class
+    func testWebService() async throws {
+        // Given
+        let mockSession = MockNetworkSession()
+        let service = WebServiceImpl(networkSession: mockSession)
+        let jsonData = """
+        {
+            "applicationId": "66ceb688a2b311eda8fc0242ac120002",
+            "applicationScreenFlow": [
+                {
+                    "screenName": "Home",
+                    "portName": "Home.RandomPage",
+                    "destinationView": "RandomPage"
+                },
+                {
+                    "screenName": "Login",
+                    "portName": "Home.Login",
+                    "destinationView": "SignUp"
+                },
+                {
+                    "screenName": "SignUp",
+                    "portName": "Home.SignUp",
+                    "destinationView": "RandomPage"
+                }
+            ]
+        }
+        """.data(using: .utf8)!
+
+        let mockURL = URL(string: "http://test.com")!
+        let mockResponse = HTTPURLResponse(url: mockURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        mockSession.mockData = jsonData
+        mockSession.mockResponse = mockResponse
+
+        // When
+        let screenFlowModel = try await service.loadUrlData(resource: "http://test.com")
+
+        // Then
+        XCTAssertEqual(screenFlowModel.applicationId, "66ceb688a2b311eda8fc0242ac120002")
+        XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].screenName, "Home")
+        XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].portName, "Home.RandomPage")
+        XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].destinationView, "RandomPage")
+    }
 }
