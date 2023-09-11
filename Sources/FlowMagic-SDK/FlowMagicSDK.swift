@@ -37,7 +37,7 @@ protocol ScreenFlowProviding {
     func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView)
 }
 
-class ScreenFlowProvider: ScreenFlowProviding {
+public class ScreenFlowProvider: ScreenFlowProviding {
 
     static let shared = ScreenFlowProvider(errorHandle: ProductionHandleFatalError())
     let errorHandle: ErrorHandlerProtocol
