@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		9790BAB92AAFA168006507F5 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9790BAB82AAFA168006507F5 /* NetworkSession.swift */; };
+		9790BABB2AAFA1BA006507F5 /* URLResponse+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9790BABA2AAFA1BA006507F5 /* URLResponse+Extension.swift */; };
 		OBJ_36 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ContentView.swift */; };
 		OBJ_37 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* View+Extension.swift */; };
 		OBJ_38 /* FlowMagicSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FlowMagicSDK.swift */; };
@@ -53,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9790BAB82AAFA168006507F5 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		9790BABA2AAFA1BA006507F5 /* URLResponse+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLResponse+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_11 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_12 /* FlowMagicSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagicSDK.swift; sourceTree = "<group>"; };
 		OBJ_13 /* FlowMagic_SDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagic_SDK.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_11 /* View+Extension.swift */,
+				9790BABA2AAFA1BA006507F5 /* URLResponse+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_17 /* WebService.swift */,
+				9790BAB82AAFA168006507F5 /* NetworkSession.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -286,8 +292,10 @@
 				OBJ_36 /* ContentView.swift in Sources */,
 				OBJ_37 /* View+Extension.swift in Sources */,
 				OBJ_38 /* FlowMagicSDK.swift in Sources */,
+				9790BAB92AAFA168006507F5 /* NetworkSession.swift in Sources */,
 				OBJ_39 /* FlowMagic_SDK.swift in Sources */,
 				OBJ_40 /* screenFlowModel.swift in Sources */,
+				9790BABB2AAFA1BA006507F5 /* URLResponse+Extension.swift in Sources */,
 				OBJ_41 /* WebService.swift in Sources */,
 				OBJ_42 /* Constants.swift in Sources */,
 				OBJ_43 /* flowMagicViewModel.swift in Sources */,
