@@ -27,3 +27,30 @@ xcuserdata/
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
+
+# Swift Package Manager
+.build/
+Derived Sources/
+.swiftpm/
+
+*.xcscmblueprint
+*.xcsettings
+*.xcworkspacedata
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+
+*~ # Backup files
+*.bak # Backup files
+*.swp # vim state
+
+iCloud Drive (Archive) - Data/
+iCloud Drive (Archive)/
+

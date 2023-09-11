@@ -1,9 +1,5 @@
 # FlowMagic-SDK
 
-A description of this package.
-=======
-# Flow Magic SDK
-
 Welcome to the Flow Magic SDK! A powerful, yet simple, screen flow management tool for SwiftUI applications. This SDK simplifies navigation between views, allowing developers to focus more on creating features and less on managing transitions.
 
 ## Core Features

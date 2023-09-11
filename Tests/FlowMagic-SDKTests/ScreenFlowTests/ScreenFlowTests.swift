@@ -1,29 +1,31 @@
-////
-////  ScreenFlowTests.swift
-////  FlowMagic-SDKTests
-////
-////  Created by Kedar Dhere on 3/24/23.
-////
+//
+//  ScreenFlowTests.swift
+//  FlowMagic-SDKTests
+//
+//  Created by Kedar Dhere on 3/24/23.
+//
 //
 import XCTest
 import SwiftUI
 @testable import FlowMagic_SDK
 
-func propertiesAreEqual(_ lhs: Any, _ rhs: Any) -> Bool {
-    let lhsMirror = Mirror(reflecting: lhs)
-    let rhsMirror = Mirror(reflecting: rhs)
-
-    for (lhsChild, rhsChild) in zip(lhsMirror.children, rhsMirror.children) {
-        guard "\(lhsChild.value)" == "\(rhsChild.value)" else { return false }
+func propertiesAreEqual(_ lhs: Any?, _ rhs: Any?) -> Bool {
+    switch (lhs, rhs) {
+    case (nil, nil):
+        return true
+    case (let lhsValue as AnyView, let rhsValue as AnyView):
+        return "\(lhsValue)" == "\(rhsValue)"
+    default:
+        return false
     }
-    return true
 }
 
 class ScreenFlowTests: XCTestCase {
-     // Test Register Screen and Get Screen
+    /// Tests the registration of a screen with given name and port names and ensures they're correctly stored.
     func testRegisterScreens() {
         // Given
-        let mockScreenFlowProvider = MockScreenProvider()
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
         let screenName = "Home"
         let portNames = ["Login", "SignUp"]
         let view = AnyView(Home())
@@ -38,10 +40,11 @@ class ScreenFlowTests: XCTestCase {
                        "Screen's portNames are different than the input portnames")
     }
 
-    // Test if screen Name is blank while registering the screens
+    /// Tests the behavior of overwriting an existing screen registration and ensures port names remain unchanged.
     func testOverwriteScreen() {
         // Given
-        let mockScreenFlowProvider = MockScreenProvider()
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
         let screenName = "Home"
         let initialPortNames = ["Login", "SignUp"]
         let overwrittenPortNames = ["Login", "SignUp", "AnotherPage"]
@@ -59,10 +62,11 @@ class ScreenFlowTests: XCTestCase {
         XCTAssertEqual(screenInfo?.1, initialPortNames)
     }
 
-    // Test Adding Connections
+    /// Tests the addition of a connection between screens through ports and validates the correct destination screen retrieval.
     func testAddConnections() {
         // Given
-        let mockScreenFlowProvider = MockScreenProvider()
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
         let homeScreen = "Home"
         let homeScrPortNames = ["Login", "SignUp"]
         let home = AnyView(Home())
@@ -85,15 +89,14 @@ class ScreenFlowTests: XCTestCase {
         XCTAssertNotNil(expectedOutput, "PortNames are not added as expected")
     }
 
-    // Add connection prior to registering the screen
+    /// Tests the behavior when attempting to add a connection to an unregistered screen and expects an error.
     func testAddConnectionWithNoRegistration() {
         // Given
-        let mockScreenFlowProvider = MockScreenProvider()
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
         let homeScreen = "Home"
         let homeScrPortNames = ["Login", "SignUp"]
         let home = AnyView(Home())
-        let mockErrorHandler = MockHandleFatalError()
-        mockScreenFlowProvider.mockErrorHandler = mockErrorHandler
 
         // Register only the Home screen
         mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScrPortNames, view: home)
@@ -106,10 +109,11 @@ class ScreenFlowTests: XCTestCase {
         XCTAssertEqual(mockErrorHandler.errorMessage, "Value of screen is nil")
     }
 
-    // Test Screen Flow updation
+    /// Tests the functionality of updating the destination views of screen connections.
     func testUpdateScreenFlow() {
         // Given
-        let mockScreenFlowProvider = MockScreenProvider()
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
         let homeScreen = "Home"
         let homeScrPortNames = ["SignUp"]
         let homeView = AnyView(Home())
@@ -141,10 +145,11 @@ class ScreenFlowTests: XCTestCase {
         XCTAssertTrue(propertiesAreEqual(expectedOutput, actualOutput))
     }
 
-    // Test the viewModel
+    /// Tests the FlowMagicViewModel's screen registration and connection rendering behavior.
     @MainActor func testViewModel() async {
         // Given
-        let mockScreenFlowProvider = MockScreenProvider()
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
         let viewModel = FlowMagicViewModel(service: MockWebService(), screenFlowProvider: mockScreenFlowProvider)
 
         let homeScreen = "Home"

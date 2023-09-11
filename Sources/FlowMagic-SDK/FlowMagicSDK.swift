@@ -18,6 +18,16 @@ class ProductionHandleFatalError: ErrorHandlerProtocol {
     }
 }
 
+class MockErrorHandler: ErrorHandlerProtocol {
+    var didHandleFatalError = false
+    var errorMessage: String?
+
+    func handleFatalError(_ message: String) {
+        didHandleFatalError = true
+        errorMessage = message
+    }
+}
+
 protocol ScreenFlowProviding {
     func registerScreen(screenName: String, portNames: [String], view: any View)
     func addConnection(fromPort: String, toScreen: String)
@@ -29,17 +39,19 @@ protocol ScreenFlowProviding {
 
 class ScreenFlowProvider: ScreenFlowProviding {
 
-    static var shared = ScreenFlowProvider()
-    let errorHandle: ErrorHandlerProtocol = ProductionHandleFatalError()
+//    static var shared = ScreenFlowProvider(errorHandler: ProductionHandleFatalError())
+    static var shared = ScreenFlowProvider(errorHandle: ProductionHandleFatalError())
+    let errorHandle: ErrorHandlerProtocol
 
     // MARK: - Properties
 
     var screens: [String: (view: AnyView, portNames: [String])]
-    var destinationViewsFromPorts: [String: AnyView?]
+    var destinationViewsFromPorts: [String:  AnyView?]
 
     // MARK: - Initialization
 
-    init() {
+    init(errorHandle: ErrorHandlerProtocol) {
+        self.errorHandle = errorHandle
         screens = [:]
         destinationViewsFromPorts = [:]
     }

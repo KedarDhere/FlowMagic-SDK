@@ -1,8 +1,8 @@
 //
-//  MockWebService.swift
-//  FlowMagic-SDKTests
+//  File.swift
 //
-//  Created by Kedar Dhere on 9/4/23.
+//
+//  Created by Kedar Dhere on 9/9/23.
 //
 
 import Foundation
@@ -32,3 +32,4 @@ class MockWebService: WebService {
         return screenFlowData
     }
 }
+
