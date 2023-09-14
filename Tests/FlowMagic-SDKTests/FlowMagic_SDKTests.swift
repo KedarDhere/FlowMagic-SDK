@@ -6,7 +6,8 @@ final class FlowMagicSDKTests: XCTestCase {
     /// Tests the registration of a screen with given name and port names and ensures they're correctly stored.
     func testRegisterScreens() {
         // Given
-        let mockScreenFlowProvider = ScreenFlowProvider()
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
         let screenName = "Home"
         let portNames = ["Login", "SignUp"]
         let view = AnyView(Home())
@@ -24,7 +25,8 @@ final class FlowMagicSDKTests: XCTestCase {
     /// Tests the behavior of overwriting an existing screen registration and ensures port names remain unchanged.
     func testOverwriteScreen() {
         // Given
-        let mockScreenFlowProvider = ScreenFlowProvider()
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
         let screenName = "Home"
         let initialPortNames = ["Login", "SignUp"]
         let overwrittenPortNames = ["Login", "SignUp", "AnotherPage"]
@@ -45,7 +47,8 @@ final class FlowMagicSDKTests: XCTestCase {
     /// Tests the addition of a connection between screens through ports and validates the correct destination screen retrieval.
     func testAddConnections() {
         // Given
-        let mockScreenFlowProvider = ScreenFlowProvider()
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
         let homeScreen = "Home"
         let homeScrPortNames = ["Login", "SignUp"]
         let home = AnyView(Home())
@@ -66,5 +69,25 @@ final class FlowMagicSDKTests: XCTestCase {
         // Then
         let expectedOutput = mockScreenFlowProvider.getDestinationScreen(portName: portName)
         XCTAssertNotNil(expectedOutput, "PortNames are not added as expected")
+    }
+
+    /// Tests the behavior when attempting to add a connection to an unregistered screen and expects an error.
+    func testAddConnectionWithNoRegistration() {
+        // Given
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
+        let homeScreen = "Home"
+        let homeScrPortNames = ["Login", "SignUp"]
+        let home = AnyView(Home())
+
+        // Register only the Home screen
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScrPortNames, view: home)
+
+        // When
+        mockScreenFlowProvider.addConnection(fromPort: "Home", toScreen: "SignUp")
+
+        // Then
+        XCTAssertTrue(mockErrorHandler.didHandleFatalError)
+        XCTAssertEqual(mockErrorHandler.errorMessage, "Value of screen is nil")
     }
 }
