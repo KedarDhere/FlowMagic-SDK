@@ -11,12 +11,15 @@ import SwiftUI
 @MainActor
 class FlowMagicViewModel: ObservableObject {
     // MARK: Properties
-    private var service: Webservice
-    @Published var destinationViewsFromPorts: [String: AnyView?] = [:]
+    private var service: WebService
+    let screenFlowProvider: ScreenFlowProviding
+    
+    @Published var destinationViewsFromPorts: [String: any View] = [:]
 
     // MARK: Initialization
-    init(service: Webservice) {
+    init(service: WebService, screenFlowProvider: ScreenFlowProviding) {
         self.service = service
+        self.screenFlowProvider = screenFlowProvider
     }
 
     // MARK: Methods
@@ -26,12 +29,23 @@ class FlowMagicViewModel: ObservableObject {
         do {
             let screenFlowModel = try await service.loadUrlData(resource: Constants.Urls.applicationScreenFlow)
             print(screenFlowModel)
-            screenFlowModel.renderDestinationView(portName: "Home.Login")
-            destinationViewsFromPorts = ScreenFlowProvider.shared.getDestinationViewsFromPorts()
+            renderDestinationView(screenFlowModel: screenFlowModel)
+            destinationViewsFromPorts = screenFlowProvider.getDestinationViewsFromPorts()
         } catch {
             print(error)
         }
 
+    }
+
+    func renderDestinationView(screenFlowModel: ScreenFlowModel) {
+        var destinationView: AnyView = ProgressView().toAnyView()
+        let screens = screenFlowProvider.getScreens()
+        for screenInfo in screenFlowModel.applicationScreenFlow {
+            let screen = screens[screenInfo.destinationView]
+            destinationView = screen!.0
+            screenFlowProvider.updateDestinationViewsFromPorts(
+                                portName: screenInfo.portName, destinationView: destinationView)
+        }
     }
 
 }

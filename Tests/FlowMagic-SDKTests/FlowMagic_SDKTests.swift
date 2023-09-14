@@ -2,6 +2,17 @@ import XCTest
 import SwiftUI
 @testable import FlowMagic_SDK
 
+func propertiesAreEqual(_ lhs: Any?, _ rhs: Any?) -> Bool {
+    switch (lhs, rhs) {
+    case (nil, nil):
+        return true
+    case (let lhsValue as AnyView, let rhsValue as AnyView):
+        return "\(lhsValue)" == "\(rhsValue)"
+    default:
+        return false
+    }
+}
+
 final class FlowMagicSDKTests: XCTestCase {
     /// Tests the registration of a screen with given name and port names and ensures they're correctly stored.
     func testRegisterScreens() {
@@ -89,5 +100,41 @@ final class FlowMagicSDKTests: XCTestCase {
         // Then
         XCTAssertTrue(mockErrorHandler.didHandleFatalError)
         XCTAssertEqual(mockErrorHandler.errorMessage, "Value of screen is nil")
+    }
+
+    /// Tests the functionality of updating the destination views of screen connections.
+    func testUpdateScreenFlow() {
+        // Given
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
+        let homeScreen = "Home"
+        let homeScrPortNames = ["SignUp"]
+        let homeView = AnyView(Home())
+
+        let signUpScreen = "SignUp"
+        let signUpScrPortNames = [String()]
+        let signUpView = AnyView(SignUp())
+
+        let loginScreen = "Login"
+        let loginScrPortNames = [String()]
+        let loginView = AnyView(Login())
+
+        // Register Home and Sign Up screens
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScrPortNames, view: homeView)
+        mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: signUpScrPortNames, view: signUpView)
+        mockScreenFlowProvider.registerScreen(screenName: loginScreen, portNames: loginScrPortNames, view: loginView)
+
+        // Add Connection
+        mockScreenFlowProvider.addConnection(fromPort: homeScreen, toScreen: signUpScreen)
+
+        // When
+        mockScreenFlowProvider.updateDestinationViewsFromPorts(
+            portName: "Home.SignUp",
+            destinationView: AnyView(Login()))
+
+        // Then
+        let expectedOutput = mockScreenFlowProvider.getDestinationScreen(portName: "Home.SignUp")
+        let actualOutput = AnyView(Login())
+        XCTAssertTrue(propertiesAreEqual(expectedOutput, actualOutput))
     }
 }

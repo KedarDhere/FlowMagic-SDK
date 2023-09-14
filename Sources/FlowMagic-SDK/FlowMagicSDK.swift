@@ -32,6 +32,9 @@ protocol ScreenFlowProviding {
     func registerScreen(screenName: String, portNames: [String], view: any View)
     func addConnection(fromPort: String, toScreen: String)
     func getDestinationScreen(portName: String) -> any View
+    func getScreens() -> [String: (view: AnyView, portNames: [String])]
+    func getDestinationViewsFromPorts() -> [String: any View]
+    func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView)
 }
 
 class ScreenFlowProvider: ScreenFlowProviding {
@@ -80,7 +83,7 @@ class ScreenFlowProvider: ScreenFlowProviding {
         return screens
     }
 
-    func getDestinationViewsFromPorts() -> [String: AnyView?] {
+    func getDestinationViewsFromPorts() -> [String: any View] {
         return destinationViewsFromPorts
     }
 
