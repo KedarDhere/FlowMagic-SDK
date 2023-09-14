@@ -22,6 +22,8 @@
 
 /* Begin PBXBuildFile section */
 		971A97B02AB2BD2400EC9A64 /* MockWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971A97AF2AB2BD2400EC9A64 /* MockWebService.swift */; };
+		971A97B22AB2C7FA00EC9A64 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971A97B12AB2C7FA00EC9A64 /* NetworkSession.swift */; };
+		971A97B42AB2C85300EC9A64 /* URLResponse+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971A97B32AB2C85300EC9A64 /* URLResponse+Extension.swift */; };
 		OBJ_35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ContentView.swift */; };
 		OBJ_36 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* View+Extension.swift */; };
 		OBJ_37 /* FlowMagicSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FlowMagicSDK.swift */; };
@@ -54,6 +56,8 @@
 
 /* Begin PBXFileReference section */
 		971A97AF2AB2BD2400EC9A64 /* MockWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWebService.swift; sourceTree = "<group>"; };
+		971A97B12AB2C7FA00EC9A64 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		971A97B32AB2C85300EC9A64 /* URLResponse+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLResponse+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_11 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_12 /* FlowMagicSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagicSDK.swift; sourceTree = "<group>"; };
 		OBJ_14 /* FlowMagic_SDKApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagic_SDKApp.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_11 /* View+Extension.swift */,
+				971A97B32AB2C85300EC9A64 /* URLResponse+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_18 /* WebService.swift */,
+				971A97B12AB2C7FA00EC9A64 /* NetworkSession.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -277,8 +283,10 @@
 				OBJ_35 /* ContentView.swift in Sources */,
 				OBJ_36 /* View+Extension.swift in Sources */,
 				OBJ_37 /* FlowMagicSDK.swift in Sources */,
+				971A97B22AB2C7FA00EC9A64 /* NetworkSession.swift in Sources */,
 				OBJ_39 /* FlowMagic_SDKApp.swift in Sources */,
 				OBJ_40 /* screenFlowModel.swift in Sources */,
+				971A97B42AB2C85300EC9A64 /* URLResponse+Extension.swift in Sources */,
 				OBJ_41 /* WebService.swift in Sources */,
 				OBJ_42 /* Constants.swift in Sources */,
 				OBJ_43 /* flowMagicViewModel.swift in Sources */,

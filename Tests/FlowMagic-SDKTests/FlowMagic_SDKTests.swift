@@ -137,4 +137,41 @@ final class FlowMagicSDKTests: XCTestCase {
         let actualOutput = AnyView(Login())
         XCTAssertTrue(propertiesAreEqual(expectedOutput, actualOutput))
     }
+
+    /// Tests the FlowMagicViewModel's screen registration and connection rendering behavior.
+    @MainActor func testViewModel() async {
+        // Given
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
+        let viewModel = FlowMagicViewModel(service: MockWebService(), screenFlowProvider: mockScreenFlowProvider)
+
+        let homeScreen = "Home"
+        let homeScrPortNames = ["SignUp"]
+        let homeView = AnyView(Home())
+
+        let signUpScreen = "SignUp"
+        let signUpScrPortNames = [String()]
+        let signUpView = AnyView(SignUp())
+
+        let loginScreen = "Login"
+        let loginScrPortNames = [String()]
+        let loginView = AnyView(Login())
+
+        // Register Home and Sign Up screens
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScrPortNames, view: homeView)
+        mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: signUpScrPortNames, view: signUpView)
+        mockScreenFlowProvider.registerScreen(screenName: loginScreen, portNames: loginScrPortNames, view: loginView)
+
+        mockScreenFlowProvider.addConnection(fromPort: homeScreen, toScreen: signUpScreen)
+        mockScreenFlowProvider.registerScreen(screenName: loginScreen, portNames: [], view: Login())
+        mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: [], view: SignUp())
+
+        // When
+        await viewModel.load()
+
+        // Then
+        let expectedOutput = mockScreenFlowProvider.getDestinationScreen(portName: "Home.Login")
+        let actualOutput = AnyView(SignUp())
+        XCTAssertTrue(propertiesAreEqual(expectedOutput, actualOutput))
+    }
 }
