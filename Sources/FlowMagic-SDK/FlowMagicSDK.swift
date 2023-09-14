@@ -25,7 +25,7 @@ class ScreenFlowProvider: ScreenFlowProviding {
 
     // MARK: - Initialization
 
-    private init() {
+    init() {
         screens = [:]
         destinationViewsFromPorts = [:]
     }
