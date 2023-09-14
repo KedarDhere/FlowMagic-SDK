@@ -1,0 +1,566 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		"flowmagic-sdk::FlowMagic-SDKPackageTests::ProductTarget" /* FlowMagic-SDKPackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_52 /* Build configuration list for PBXAggregateTarget "FlowMagic-SDKPackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_55 /* PBXTargetDependency */,
+			);
+			name = "FlowMagic-SDKPackageTests";
+			productName = "FlowMagic-SDKPackageTests";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		OBJ_35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ContentView.swift */; };
+		OBJ_36 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* View+Extension.swift */; };
+		OBJ_37 /* FlowMagicSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FlowMagicSDK.swift */; };
+		OBJ_39 /* FlowMagic_SDKApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* FlowMagic_SDKApp.swift */; };
+		OBJ_40 /* screenFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* screenFlowModel.swift */; };
+		OBJ_41 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* WebService.swift */; };
+		OBJ_42 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Constants.swift */; };
+		OBJ_43 /* flowMagicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* flowMagicViewModel.swift */; };
+		OBJ_50 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_61 /* FlowMagic_SDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* FlowMagic_SDKTests.swift */; };
+		OBJ_63 /* FlowMagic_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "flowmagic-sdk::FlowMagic-SDK::Product" /* FlowMagic_SDK.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		971A97AB2AB2845900EC9A64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "flowmagic-sdk::FlowMagic-SDK";
+			remoteInfo = "FlowMagic-SDK";
+		};
+		971A97AC2AB2845900EC9A64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "flowmagic-sdk::FlowMagic-SDKTests";
+			remoteInfo = "FlowMagic-SDKTests";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		OBJ_11 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		OBJ_12 /* FlowMagicSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagicSDK.swift; sourceTree = "<group>"; };
+		OBJ_14 /* FlowMagic_SDKApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagic_SDKApp.swift; sourceTree = "<group>"; };
+		OBJ_16 /* screenFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = screenFlowModel.swift; sourceTree = "<group>"; };
+		OBJ_18 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		OBJ_20 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		OBJ_22 /* flowMagicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flowMagicViewModel.swift; sourceTree = "<group>"; };
+		OBJ_25 /* FlowMagic_SDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagic_SDKTests.swift; sourceTree = "<group>"; };
+		OBJ_29 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		"flowmagic-sdk::FlowMagic-SDK::Product" /* FlowMagic_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FlowMagic_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"flowmagic-sdk::FlowMagic-SDKTests::Product" /* FlowMagic_SDKTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; name = FlowMagic_SDKTests.xctest; path = "FlowMagic-SDKTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_44 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_63 /* FlowMagic_SDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		OBJ_10 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_11 /* View+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		OBJ_15 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_16 /* screenFlowModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		OBJ_17 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_18 /* WebService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		OBJ_19 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_20 /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		OBJ_21 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_22 /* flowMagicViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		OBJ_23 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_24 /* FlowMagic-SDKTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_24 /* FlowMagic-SDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_25 /* FlowMagic_SDKTests.swift */,
+			);
+			name = "FlowMagic-SDKTests";
+			path = "Tests/FlowMagic-SDKTests";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_26 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"flowmagic-sdk::FlowMagic-SDK::Product" /* FlowMagic_SDK.framework */,
+				"flowmagic-sdk::FlowMagic-SDKTests::Product" /* FlowMagic_SDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_5 /*  */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_23 /* Tests */,
+				OBJ_26 /* Products */,
+				OBJ_29 /* README.md */,
+			);
+			name = "";
+			sourceTree = "<group>";
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* FlowMagic-SDK */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_8 /* FlowMagic-SDK */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* ContentView.swift */,
+				OBJ_10 /* Extensions */,
+				OBJ_12 /* FlowMagicSDK.swift */,
+				OBJ_14 /* FlowMagic_SDKApp.swift */,
+				OBJ_15 /* Model */,
+				OBJ_17 /* Services */,
+				OBJ_19 /* Utils */,
+				OBJ_21 /* ViewModels */,
+			);
+			name = "FlowMagic-SDK";
+			path = "Sources/FlowMagic-SDK";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		"flowmagic-sdk::FlowMagic-SDK" /* FlowMagic-SDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_31 /* Build configuration list for PBXNativeTarget "FlowMagic-SDK" */;
+			buildPhases = (
+				OBJ_34 /* Sources */,
+				OBJ_44 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FlowMagic-SDK";
+			productName = FlowMagic_SDK;
+			productReference = "flowmagic-sdk::FlowMagic-SDK::Product" /* FlowMagic_SDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"flowmagic-sdk::FlowMagic-SDKTests" /* FlowMagic-SDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_57 /* Build configuration list for PBXNativeTarget "FlowMagic-SDKTests" */;
+			buildPhases = (
+				OBJ_60 /* Sources */,
+				OBJ_62 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_64 /* PBXTargetDependency */,
+			);
+			name = "FlowMagic-SDKTests";
+			productName = FlowMagic_SDKTests;
+			productReference = "flowmagic-sdk::FlowMagic-SDKTests::Product" /* FlowMagic_SDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"flowmagic-sdk::SwiftPMPackageDescription" /* FlowMagic-SDKPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_46 /* Build configuration list for PBXNativeTarget "FlowMagic-SDKPackageDescription" */;
+			buildPhases = (
+				OBJ_49 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FlowMagic-SDKPackageDescription";
+			productName = "FlowMagic-SDKPackageDescription";
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "FlowMagic-SDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_26 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"flowmagic-sdk::FlowMagic-SDK" /* FlowMagic-SDK */,
+				"flowmagic-sdk::SwiftPMPackageDescription" /* FlowMagic-SDKPackageDescription */,
+				"flowmagic-sdk::FlowMagic-SDKPackageTests::ProductTarget" /* FlowMagic-SDKPackageTests */,
+				"flowmagic-sdk::FlowMagic-SDKTests" /* FlowMagic-SDKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_35 /* ContentView.swift in Sources */,
+				OBJ_36 /* View+Extension.swift in Sources */,
+				OBJ_37 /* FlowMagicSDK.swift in Sources */,
+				OBJ_39 /* FlowMagic_SDKApp.swift in Sources */,
+				OBJ_40 /* screenFlowModel.swift in Sources */,
+				OBJ_41 /* WebService.swift in Sources */,
+				OBJ_42 /* Constants.swift in Sources */,
+				OBJ_43 /* flowMagicViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_49 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_50 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_61 /* FlowMagic_SDKTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		OBJ_55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "flowmagic-sdk::FlowMagic-SDKTests" /* FlowMagic-SDKTests */;
+			targetProxy = 971A97AC2AB2845900EC9A64 /* PBXContainerItemProxy */;
+		};
+		OBJ_64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "flowmagic-sdk::FlowMagic-SDK" /* FlowMagic-SDK */;
+			targetProxy = 971A97AB2AB2845900EC9A64 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+					"DEBUG=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "$(AVAILABLE_PLATFORMS)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "FlowMagic-SDK.xcodeproj/FlowMagic_SDK_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "FlowMagic-SDK";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = "FlowMagic-SDK";
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Debug;
+		};
+		OBJ_33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "FlowMagic-SDK.xcodeproj/FlowMagic_SDK_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "FlowMagic-SDK";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = "FlowMagic-SDK";
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Release;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "$(AVAILABLE_PLATFORMS)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		OBJ_47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -package-description-version 5.7.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		OBJ_48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk -package-description-version 5.7.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		OBJ_53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "FlowMagic-SDK.xcodeproj/FlowMagic_SDKTests_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = "FlowMagic-SDKTests";
+				TVOS_DEPLOYMENT_TARGET = 14.0;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Debug;
+		};
+		OBJ_59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "FlowMagic-SDK.xcodeproj/FlowMagic_SDKTests_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = "FlowMagic-SDKTests";
+				TVOS_DEPLOYMENT_TARGET = 14.0;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_2 /* Build configuration list for PBXProject "FlowMagic-SDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_31 /* Build configuration list for PBXNativeTarget "FlowMagic-SDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_32 /* Debug */,
+				OBJ_33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_46 /* Build configuration list for PBXNativeTarget "FlowMagic-SDKPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_47 /* Debug */,
+				OBJ_48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_52 /* Build configuration list for PBXAggregateTarget "FlowMagic-SDKPackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_53 /* Debug */,
+				OBJ_54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_57 /* Build configuration list for PBXNativeTarget "FlowMagic-SDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_58 /* Debug */,
+				OBJ_59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
+}
