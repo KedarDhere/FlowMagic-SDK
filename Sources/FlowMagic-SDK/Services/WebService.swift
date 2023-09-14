@@ -12,18 +12,18 @@ enum NetworkError: Error {
     case invalidServerResponse
 }
 
-protocol WebService {
+public protocol WebService {
     func loadUrlData(resource: String) async throws -> ScreenFlowModel
 }
 
-class WebServiceImpl: WebService {
+public class WebServiceImpl: WebService {
     private let networkSession: NetworkSession
 
-    init(networkSession: NetworkSession = URLSession.shared) {
+    public init(networkSession: NetworkSession = URLSession.shared) {
         self.networkSession = networkSession
     }
 
-    func loadUrlData(resource: String) async throws -> ScreenFlowModel {
+    public func loadUrlData(resource: String) async throws -> ScreenFlowModel {
         guard let url = URL(string: resource) else {
             throw NetworkError.invalidUrl
         }

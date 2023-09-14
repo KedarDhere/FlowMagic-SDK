@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @MainActor
-class FlowMagicViewModel: ObservableObject {
+public class FlowMagicViewModel: ObservableObject {
     // MARK: Properties
     private var service: WebService
     let screenFlowProvider: ScreenFlowProviding
@@ -17,7 +17,7 @@ class FlowMagicViewModel: ObservableObject {
     @Published var destinationViewsFromPorts: [String: any View] = [:]
 
     // MARK: Initialization
-    init(service: WebService, screenFlowProvider: ScreenFlowProviding) {
+    public init(service: WebService, screenFlowProvider: ScreenFlowProviding) {
         self.service = service
         self.screenFlowProvider = screenFlowProvider
     }
@@ -25,7 +25,7 @@ class FlowMagicViewModel: ObservableObject {
     // MARK: Methods
 
     /// Make the network call and fetch the latest screen data from the server
-    func load() async {
+    public func load() async {
         do {
             let screenFlowModel = try await service.loadUrlData(resource: Constants.Urls.applicationScreenFlow)
             print(screenFlowModel)
@@ -37,7 +37,7 @@ class FlowMagicViewModel: ObservableObject {
 
     }
 
-    func renderDestinationView(screenFlowModel: ScreenFlowModel) {
+    public func renderDestinationView(screenFlowModel: ScreenFlowModel) {
         var destinationView: AnyView = ProgressView().toAnyView()
         let screens = screenFlowProvider.getScreens()
         for screenInfo in screenFlowModel.applicationScreenFlow {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FlowMagic_SDK
 
 struct Home: View {
 

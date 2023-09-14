@@ -24,10 +24,10 @@
 		971A97B02AB2BD2400EC9A64 /* MockWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971A97AF2AB2BD2400EC9A64 /* MockWebService.swift */; };
 		971A97B22AB2C7FA00EC9A64 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971A97B12AB2C7FA00EC9A64 /* NetworkSession.swift */; };
 		971A97B42AB2C85300EC9A64 /* URLResponse+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971A97B32AB2C85300EC9A64 /* URLResponse+Extension.swift */; };
-		OBJ_35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ContentView.swift */; };
+		971A97B82AB36DC400EC9A64 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ContentView.swift */; };
+		971A97BA2AB3704600EC9A64 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ContentView.swift */; };
 		OBJ_36 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* View+Extension.swift */; };
 		OBJ_37 /* FlowMagicSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FlowMagicSDK.swift */; };
-		OBJ_39 /* FlowMagic_SDKApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* FlowMagic_SDKApp.swift */; };
 		OBJ_40 /* screenFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* screenFlowModel.swift */; };
 		OBJ_41 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* WebService.swift */; };
 		OBJ_42 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Constants.swift */; };
@@ -60,7 +60,6 @@
 		971A97B32AB2C85300EC9A64 /* URLResponse+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLResponse+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_11 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_12 /* FlowMagicSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagicSDK.swift; sourceTree = "<group>"; };
-		OBJ_14 /* FlowMagic_SDKApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagic_SDKApp.swift; sourceTree = "<group>"; };
 		OBJ_16 /* screenFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = screenFlowModel.swift; sourceTree = "<group>"; };
 		OBJ_18 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		OBJ_20 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -145,6 +144,7 @@
 		OBJ_24 /* FlowMagic-SDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_9 /* ContentView.swift */,
 				OBJ_25 /* FlowMagic_SDKTests.swift */,
 				971A97AF2AB2BD2400EC9A64 /* MockWebService.swift */,
 			);
@@ -183,10 +183,8 @@
 		OBJ_8 /* FlowMagic-SDK */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_9 /* ContentView.swift */,
 				OBJ_10 /* Extensions */,
 				OBJ_12 /* FlowMagicSDK.swift */,
-				OBJ_14 /* FlowMagic_SDKApp.swift */,
 				OBJ_15 /* Model */,
 				OBJ_17 /* Services */,
 				OBJ_19 /* Utils */,
@@ -280,13 +278,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_35 /* ContentView.swift in Sources */,
 				OBJ_36 /* View+Extension.swift in Sources */,
 				OBJ_37 /* FlowMagicSDK.swift in Sources */,
 				971A97B22AB2C7FA00EC9A64 /* NetworkSession.swift in Sources */,
-				OBJ_39 /* FlowMagic_SDKApp.swift in Sources */,
 				OBJ_40 /* screenFlowModel.swift in Sources */,
 				971A97B42AB2C85300EC9A64 /* URLResponse+Extension.swift in Sources */,
+				971A97BA2AB3704600EC9A64 /* ContentView.swift in Sources */,
 				OBJ_41 /* WebService.swift in Sources */,
 				OBJ_42 /* Constants.swift in Sources */,
 				OBJ_43 /* flowMagicViewModel.swift in Sources */,
@@ -307,6 +304,7 @@
 			files = (
 				971A97B02AB2BD2400EC9A64 /* MockWebService.swift in Sources */,
 				OBJ_61 /* FlowMagic_SDKTests.swift in Sources */,
+				971A97B82AB36DC400EC9A64 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
