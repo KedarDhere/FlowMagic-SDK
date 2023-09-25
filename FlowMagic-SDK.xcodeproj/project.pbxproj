@@ -25,10 +25,10 @@
 		OBJ_36 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* View+Extension.swift */; };
 		OBJ_37 /* FlowMagicSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FlowMagicSDK.swift */; };
 		OBJ_39 /* FlowMagic_SDKApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* FlowMagic_SDKApp.swift */; };
-		OBJ_40 /* screenFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* screenFlowModel.swift */; };
+		OBJ_40 /* ScreenFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* ScreenFlowModel.swift */; };
 		OBJ_41 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* WebService.swift */; };
 		OBJ_42 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Constants.swift */; };
-		OBJ_43 /* flowMagicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* flowMagicViewModel.swift */; };
+		OBJ_43 /* FlowMagicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* FlowMagicViewModel.swift */; };
 		OBJ_50 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_61 /* FlowMagic_SDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* FlowMagic_SDKTests.swift */; };
 		OBJ_63 /* FlowMagic_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "flowmagic-sdk::FlowMagic-SDK::Product" /* FlowMagic_SDK.framework */; };
@@ -55,10 +55,10 @@
 		OBJ_11 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_12 /* FlowMagicSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagicSDK.swift; sourceTree = "<group>"; };
 		OBJ_14 /* FlowMagic_SDKApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagic_SDKApp.swift; sourceTree = "<group>"; };
-		OBJ_16 /* screenFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = screenFlowModel.swift; sourceTree = "<group>"; };
+		OBJ_16 /* ScreenFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlowModel.swift; sourceTree = "<group>"; };
 		OBJ_18 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		OBJ_20 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		OBJ_22 /* flowMagicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flowMagicViewModel.swift; sourceTree = "<group>"; };
+		OBJ_22 /* FlowMagicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagicViewModel.swift; sourceTree = "<group>"; };
 		OBJ_25 /* FlowMagic_SDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagic_SDKTests.swift; sourceTree = "<group>"; };
 		OBJ_29 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		OBJ_15 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_16 /* screenFlowModel.swift */,
+				OBJ_16 /* ScreenFlowModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -121,7 +121,7 @@
 		OBJ_21 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_22 /* flowMagicViewModel.swift */,
+				OBJ_22 /* FlowMagicViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -152,7 +152,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -161,7 +161,6 @@
 				OBJ_26 /* Products */,
 				OBJ_29 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -254,7 +253,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_26 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -276,10 +275,10 @@
 				OBJ_36 /* View+Extension.swift in Sources */,
 				OBJ_37 /* FlowMagicSDK.swift in Sources */,
 				OBJ_39 /* FlowMagic_SDKApp.swift in Sources */,
-				OBJ_40 /* screenFlowModel.swift in Sources */,
+				OBJ_40 /* ScreenFlowModel.swift in Sources */,
 				OBJ_41 /* WebService.swift in Sources */,
 				OBJ_42 /* Constants.swift in Sources */,
-				OBJ_43 /* flowMagicViewModel.swift in Sources */,
+				OBJ_43 /* FlowMagicViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
