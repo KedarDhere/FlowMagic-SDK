@@ -28,10 +28,10 @@
 		971A97BA2AB3704600EC9A64 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ContentView.swift */; };
 		OBJ_36 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* View+Extension.swift */; };
 		OBJ_37 /* FlowMagicSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FlowMagicSDK.swift */; };
-		OBJ_40 /* screenFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* screenFlowModel.swift */; };
+		OBJ_40 /* ScreenFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* ScreenFlowModel.swift */; };
 		OBJ_41 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* WebService.swift */; };
 		OBJ_42 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Constants.swift */; };
-		OBJ_43 /* flowMagicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* flowMagicViewModel.swift */; };
+		OBJ_43 /* FlowMagicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* FlowMagicViewModel.swift */; };
 		OBJ_50 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_61 /* FlowMagic_SDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* FlowMagic_SDKTests.swift */; };
 		OBJ_63 /* FlowMagic_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "flowmagic-sdk::FlowMagic-SDK::Product" /* FlowMagic_SDK.framework */; };
@@ -60,10 +60,10 @@
 		971A97B32AB2C85300EC9A64 /* URLResponse+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLResponse+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_11 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_12 /* FlowMagicSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagicSDK.swift; sourceTree = "<group>"; };
-		OBJ_16 /* screenFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = screenFlowModel.swift; sourceTree = "<group>"; };
+		OBJ_16 /* ScreenFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFlowModel.swift; sourceTree = "<group>"; };
 		OBJ_18 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		OBJ_20 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		OBJ_22 /* flowMagicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flowMagicViewModel.swift; sourceTree = "<group>"; };
+		OBJ_22 /* FlowMagicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagicViewModel.swift; sourceTree = "<group>"; };
 		OBJ_25 /* FlowMagic_SDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowMagic_SDKTests.swift; sourceTree = "<group>"; };
 		OBJ_29 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		OBJ_15 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_16 /* screenFlowModel.swift */,
+				OBJ_16 /* ScreenFlowModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -128,7 +128,7 @@
 		OBJ_21 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_22 /* flowMagicViewModel.swift */,
+				OBJ_22 /* FlowMagicViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -281,12 +281,12 @@
 				OBJ_36 /* View+Extension.swift in Sources */,
 				OBJ_37 /* FlowMagicSDK.swift in Sources */,
 				971A97B22AB2C7FA00EC9A64 /* NetworkSession.swift in Sources */,
-				OBJ_40 /* screenFlowModel.swift in Sources */,
+				OBJ_40 /* ScreenFlowModel.swift in Sources */,
 				971A97B42AB2C85300EC9A64 /* URLResponse+Extension.swift in Sources */,
 				971A97BA2AB3704600EC9A64 /* ContentView.swift in Sources */,
 				OBJ_41 /* WebService.swift in Sources */,
 				OBJ_42 /* Constants.swift in Sources */,
-				OBJ_43 /* flowMagicViewModel.swift in Sources */,
+				OBJ_43 /* FlowMagicViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
