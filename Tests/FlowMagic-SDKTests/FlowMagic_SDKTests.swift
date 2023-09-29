@@ -61,7 +61,7 @@ final class FlowMagicSDKTests: XCTestCase {
         let mockErrorHandler = MockErrorHandler()
         let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
         let homeScreen = "Home"
-        let homeScrPortNames = ["Login", "SignUp"]
+        let homeScreenPortNames = ["Login", "SignUp"]
         let home = AnyView(Home())
 
         let signUpScreen = "SignUp"
@@ -71,7 +71,7 @@ final class FlowMagicSDKTests: XCTestCase {
         let portName = "Home.SignUp"
 
         // Register the screen initially
-        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScrPortNames, view: home)
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScreenPortNames, view: home)
         mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: signUpScrPortNames, view: signUp)
 
         // When
@@ -88,11 +88,11 @@ final class FlowMagicSDKTests: XCTestCase {
         let mockErrorHandler = MockErrorHandler()
         let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
         let homeScreen = "Home"
-        let homeScrPortNames = ["Login", "SignUp"]
+        let homeScreenPortNames = ["Login", "SignUp"]
         let home = AnyView(Home())
 
         // Register only the Home screen
-        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScrPortNames, view: home)
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScreenPortNames, view: home)
 
         // When
         mockScreenFlowProvider.addConnection(fromPort: "Home", toScreen: "SignUp")
@@ -108,7 +108,7 @@ final class FlowMagicSDKTests: XCTestCase {
         let mockErrorHandler = MockErrorHandler()
         let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
         let homeScreen = "Home"
-        let homeScrPortNames = ["SignUp"]
+        let homeScreenPortNames = ["SignUp"]
         let homeView = AnyView(Home())
 
         let signUpScreen = "SignUp"
@@ -120,7 +120,7 @@ final class FlowMagicSDKTests: XCTestCase {
         let loginView = AnyView(Login())
 
         // Register Home and Sign Up screens
-        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScrPortNames, view: homeView)
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScreenPortNames, view: homeView)
         mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: signUpScrPortNames, view: signUpView)
         mockScreenFlowProvider.registerScreen(screenName: loginScreen, portNames: loginScrPortNames, view: loginView)
 
@@ -146,7 +146,7 @@ final class FlowMagicSDKTests: XCTestCase {
         let viewModel = FlowMagicViewModel(service: MockWebService(), screenFlowProvider: mockScreenFlowProvider)
 
         let homeScreen = "Home"
-        let homeScrPortNames = ["SignUp"]
+        let homeScreenPortNames = ["SignUp"]
         let homeView = AnyView(Home())
 
         let signUpScreen = "SignUp"
@@ -158,7 +158,7 @@ final class FlowMagicSDKTests: XCTestCase {
         let loginView = AnyView(Login())
 
         // Register Home and Sign Up screens
-        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScrPortNames, view: homeView)
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScreenPortNames, view: homeView)
         mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: signUpScrPortNames, view: signUpView)
         mockScreenFlowProvider.registerScreen(screenName: loginScreen, portNames: loginScrPortNames, view: loginView)
 
