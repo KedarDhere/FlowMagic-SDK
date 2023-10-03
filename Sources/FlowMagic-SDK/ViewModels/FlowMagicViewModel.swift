@@ -47,5 +47,4 @@ class FlowMagicViewModel: ObservableObject {
                                 portName: screenInfo.portName, destinationView: destinationView)
         }
     }
-
 }
