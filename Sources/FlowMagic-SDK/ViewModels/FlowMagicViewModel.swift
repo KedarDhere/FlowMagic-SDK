@@ -17,6 +17,7 @@ public class FlowMagicViewModel: ObservableObject {
     @Published var destinationViewsFromPorts: [String: any View] = [:]
 
     // MARK: Initialization
+  
     public init(service: WebService, screenFlowProvider: ScreenFlowProviding) {
         self.service = service
         self.screenFlowProvider = screenFlowProvider
@@ -47,5 +48,4 @@ public class FlowMagicViewModel: ObservableObject {
                                 portName: screenInfo.portName, destinationView: destinationView)
         }
     }
-
 }
