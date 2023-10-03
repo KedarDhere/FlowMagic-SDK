@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol NetworkSession {
+public protocol NetworkSession {
     func loadData(from url: URL) async throws -> (Data, HTTPURLResponse)
 }
 
 extension URLSession: NetworkSession {
-    func loadData(from url: URL) async throws -> (Data, HTTPURLResponse) {
+    public func loadData(from url: URL) async throws -> (Data, HTTPURLResponse) {
         let (data, response) = try await self.data(from: url)
         if let httpResponse = response as? HTTPURLResponse {
             return (data, httpResponse)
@@ -23,12 +23,12 @@ extension URLSession: NetworkSession {
     }
 }
 
-class MockNetworkSession: NetworkSession {
+public class MockNetworkSession: NetworkSession {
     var mockData: Data?
     var mockResponse: HTTPURLResponse?
     var mockError: Error?
 
-    func loadData(from url: URL) async throws -> (Data, HTTPURLResponse) {
+    public func loadData(from url: URL) async throws -> (Data, HTTPURLResponse) {
         if let error = mockError {
             throw error
         }
