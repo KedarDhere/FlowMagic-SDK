@@ -8,15 +8,39 @@
 import Foundation
 import SwiftUI
 
+protocol ErrorHandlerProtocol {
+    func handleFatalError(_ message: String)
+}
+
+class ProductionHandleFatalError: ErrorHandlerProtocol {
+    func handleFatalError(_ message: String) {
+        fatalError(message)
+    }
+}
+
+class MockErrorHandler: ErrorHandlerProtocol {
+    var didHandleFatalError = false
+    var errorMessage: String?
+
+    func handleFatalError(_ message: String) {
+        didHandleFatalError = true
+        errorMessage = message
+    }
+}
+
 protocol ScreenFlowProviding {
     func registerScreen(screenName: String, portNames: [String], view: any View)
     func addConnection(fromPort: String, toScreen: String)
     func getDestinationScreen(portName: String) -> any View
+    func getScreens() -> [String: (view: AnyView, portNames: [String])]
+    func getDestinationViewsFromPorts() -> [String: any View]
+    func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView)
 }
 
 class ScreenFlowProvider: ScreenFlowProviding {
 
-    static var shared = ScreenFlowProvider()
+    static var shared = ScreenFlowProvider(errorHandle: ProductionHandleFatalError())
+    let errorHandle: ErrorHandlerProtocol
 
     // MARK: - Properties
 
@@ -25,7 +49,8 @@ class ScreenFlowProvider: ScreenFlowProviding {
 
     // MARK: - Initialization
 
-    private init() {
+    init(errorHandle: ErrorHandlerProtocol) {
+        self.errorHandle = errorHandle
         screens = [:]
         destinationViewsFromPorts = [:]
     }
@@ -42,7 +67,8 @@ class ScreenFlowProvider: ScreenFlowProviding {
 
     func addConnection(fromPort: String, toScreen: String) {
         guard let view = screens[toScreen]?.view else {
-            fatalError("Value of screen is nil")
+            errorHandle.handleFatalError("Value of screen is nil")
+            return
         }
 
         let portName = fromPort + "." + toScreen
@@ -57,7 +83,7 @@ class ScreenFlowProvider: ScreenFlowProviding {
         return screens
     }
 
-    func getDestinationViewsFromPorts() -> [String: AnyView?] {
+    func getDestinationViewsFromPorts() -> [String: any View] {
         return destinationViewsFromPorts
     }
 

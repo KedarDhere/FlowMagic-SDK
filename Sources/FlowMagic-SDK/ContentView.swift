@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Home: View {
 
-    @StateObject private var viewModel = FlowMagicViewModel(service: Webservice())
+    @StateObject private var viewModel = FlowMagicViewModel(service: WebServiceImpl(), screenFlowProvider: ScreenFlowProvider.shared)
     var body: some View {
         NavigationView {
             VStack {
