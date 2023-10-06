@@ -82,6 +82,7 @@ public class ScreenFlowProvider: ScreenFlowProviding {
     }
 
     public func getDestinationScreen(portName: String) -> any View {
+        updateScreenFlow()
         return destinationViewsFromPorts[portName]
     }
 
