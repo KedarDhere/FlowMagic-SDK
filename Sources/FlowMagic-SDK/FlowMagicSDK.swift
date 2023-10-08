@@ -35,17 +35,21 @@ public protocol ScreenFlowProviding {
     func getScreens() -> [String: (view: AnyView, portNames: [String])]
     func getDestinationViewsFromPorts() -> [String: any View]
     func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView)
+    func saveDestinationViewsFromPorts()
+    func updateDestinationScreenFromPorts(portName: String, destinationScreen: String)
 }
 
 public class ScreenFlowProvider: ScreenFlowProviding {
 
     public static var shared = ScreenFlowProvider(errorHandle: ProductionHandleFatalError())
     let errorHandle: ErrorHandlerProtocol
+    let userDefaultKey: String = "screenFlow"
 
     // MARK: - Properties
 
     public var screens: [String: (view: AnyView, portNames: [String])]
-    public var destinationViewsFromPorts: [String: AnyView?]
+    public var destinationViewsFromPorts: [String: AnyView?] 
+    public var destinationScreensFromPorts: [String: String]
 
     // MARK: - Initialization
 
@@ -53,6 +57,7 @@ public class ScreenFlowProvider: ScreenFlowProviding {
         self.errorHandle = errorHandle
         screens = [:]
         destinationViewsFromPorts = [:]
+        destinationScreensFromPorts = [:]
     }
 
     // MARK: - Methods
@@ -73,9 +78,11 @@ public class ScreenFlowProvider: ScreenFlowProviding {
 
         let portName = fromPort + "." + toScreen
         destinationViewsFromPorts[portName] = view
+        destinationScreensFromPorts[portName] = toScreen
     }
 
     public func getDestinationScreen(portName: String) -> any View {
+        updateScreenFlow()
         return destinationViewsFromPorts[portName]
     }
 
@@ -84,10 +91,32 @@ public class ScreenFlowProvider: ScreenFlowProviding {
     }
 
     public func getDestinationViewsFromPorts() -> [String: any View] {
+        updateScreenFlow()
         return destinationViewsFromPorts
     }
 
     public func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView) {
         destinationViewsFromPorts[portName] = destinationView
     }
+
+    public func saveDestinationViewsFromPorts() {
+        UserDefaults.standard.set(destinationScreensFromPorts, forKey: userDefaultKey)
+    }
+    
+    public func updateDestinationScreenFromPorts(portName: String, destinationScreen: String){
+        destinationScreensFromPorts[portName] = destinationScreen
+        saveDestinationViewsFromPorts()
+    }
+
+    public func updateScreenFlow() {
+        guard let newScreenFlow = UserDefaults.standard.object(forKey: userDefaultKey) as? [String: String] else {return}
+        for (portName, destinationScreen ) in newScreenFlow {
+            guard let view = screens[destinationScreen]?.view else {
+                errorHandle.handleFatalError("Value of screen is nil")
+                return
+            }
+            updateDestinationViewsFromPorts(portName: portName, destinationView: view)
+        }
+    }
+
 }

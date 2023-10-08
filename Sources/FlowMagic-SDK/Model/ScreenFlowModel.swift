@@ -8,19 +8,19 @@
 import Foundation
 import SwiftUI
 
-public struct ScreenInfoModel: Decodable {
+public struct ScreenInfoModel: Codable {
     let screenName: String
     let portName: String
     let destinationView: String
 }
 
-public struct ApplicationScreenFlowModel: Decodable {
+public struct ApplicationScreenFlowModel: Codable {
     let screenName: String
     let portName: String
     let destinationView: String
 }
 
-public struct ScreenFlowModel: Decodable {
+public struct ScreenFlowModel: Codable {
     let applicationId: String
     let applicationScreenFlow: [ApplicationScreenFlowModel]
 }
