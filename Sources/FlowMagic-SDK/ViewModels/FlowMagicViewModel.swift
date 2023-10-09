@@ -48,7 +48,6 @@ public class FlowMagicViewModel: ObservableObject {
             destinationView = screen!.0
             screenFlowProvider.updateDestinationViewsFromPorts(
                 portName: screenInfo.portName, destinationScreen: screenInfo.destinationView, destinationView: destinationView)
-//            screenFlowProvider.updateDestinationScreenFromPorts(portName: screenInfo.portName, destinationScreen: screenInfo.destinationView)
         }
     }
 }

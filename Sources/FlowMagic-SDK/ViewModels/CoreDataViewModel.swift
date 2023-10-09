@@ -23,11 +23,10 @@ public class CoreDataViewModel: CoreDataViewModelProtocol {
 
     // MARK: Initialization
 
-    init(storeType: String) {
+    public init(storeType: String) {
         let modelURL = Bundle.module.url(forResource: "Model", withExtension: "momd")!
         let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)
         self.screenFlowContainer = NSPersistentContainer(name: "Model", managedObjectModel: managedObjectModel!)
-//        loadContainer(storeType: String)
         loadContainer(storeType: storeType)
     }
 
@@ -89,7 +88,7 @@ public class CoreDataViewModel: CoreDataViewModelProtocol {
     }
 
     /// Update data
-    func updateScreenFlowEntity(source: String, destination: String) {
+    public func updateScreenFlowEntity(source: String, destination: String) {
         let savedScreenFlowEntity = fetchScreenFlows()
         guard !savedScreenFlowEntity.isEmpty else {
             print("No Data saved in Core Data")
@@ -114,7 +113,7 @@ public class CoreDataViewModel: CoreDataViewModelProtocol {
     }
 
     /// Reset Core Data
-    func deleteData() {
+    public func deleteData() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "ScreenFlowEntity")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest )
 
