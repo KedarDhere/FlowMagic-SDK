@@ -46,8 +46,7 @@ public class ScreenFlowProvider: ScreenFlowProviding {
     // MARK: - Properties
 
     public var screens: [String: (view: AnyView, portNames: [String])]
-    public var destinationViewsFromPorts: [String: AnyView?] 
-//    public var destinationScreensFromPorts: [String: String]
+    public var destinationViewsFromPorts: [String: AnyView?]
 
     // MARK: - Initialization
 
@@ -55,7 +54,6 @@ public class ScreenFlowProvider: ScreenFlowProviding {
         self.errorHandle = errorHandle
         screens = [:]
         destinationViewsFromPorts = [:]
-//        destinationScreensFromPorts = [:]
     }
 
     // MARK: - Methods
@@ -93,14 +91,11 @@ public class ScreenFlowProvider: ScreenFlowProviding {
     }
 
     public func updateDestinationViewsFromPorts(portName: String, destinationScreen: String, destinationView: AnyView) {
-        CoreDataViewModel.sharedCoreDataViewModel.updateScreenFlowEntity(source: portName, destination: destinationScreen)
+        if CoreDataViewModel.sharedCoreDataViewModel.screenFlowContainer.viewContext.hasChanges {
+            CoreDataViewModel.sharedCoreDataViewModel.updateScreenFlowEntity(source: portName, destination: destinationScreen)
+        }
         destinationViewsFromPorts[portName] = destinationView
     }
-
-//    public func updateDestinationScreenFromPorts(portName: String, destinationScreen: String){
-//        destinationScreensFromPorts[portName] = destinationScreen
-//        CoreDataViewModel.sharedCoreDataViewModel.updateScreenFlowEntity(source: portName, destination: destinationScreen)
-//    }
 
     public func updateScreenFlow() {
         let newScreenFlow = CoreDataViewModel.sharedCoreDataViewModel.fetchScreenFlows()

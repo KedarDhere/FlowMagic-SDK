@@ -57,13 +57,6 @@ public class CoreDataViewModel: CoreDataViewModelProtocol {
     
     /// Add a new Screen Flow to the Core Data entity
     public func addScreenFlow(source: String, destination: String) {
-//        if let existingFlow = fetchScreenFlows().first(where: { $0.sourceScreen == source }) {
-//            existingFlow.destinationScreen = destination
-//        } else {
-//            let newScreenFlow = ScreenFlowEntity(context: screenFlowContainer.viewContext)
-//            newScreenFlow.sourceScreen = source
-//            newScreenFlow.destinationScreen = destination
-//        }
         let request: NSFetchRequest<ScreenFlowEntity> = ScreenFlowEntity.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "sourceScreen == %@", source)
         request.predicate = predicate
@@ -75,7 +68,10 @@ public class CoreDataViewModel: CoreDataViewModelProtocol {
             newScreenFlow.sourceScreen = source
             newScreenFlow.destinationScreen = destination
         }
-        saveData()
+
+        if screenFlowContainer.viewContext.hasChanges{
+            saveData()
+        }
     }
     
     /// Save data to ScreenFlowEntity
@@ -100,7 +96,10 @@ public class CoreDataViewModel: CoreDataViewModelProtocol {
         for entity in entityToUpdate {
             entity.destinationScreen = destination
         }
-        saveData()
+
+        if screenFlowContainer.viewContext.hasChanges {
+            saveData()
+        }
 
         //Update the destinationViewsFromPorts
         let screens = ScreenFlowProvider.shared.getScreens()
