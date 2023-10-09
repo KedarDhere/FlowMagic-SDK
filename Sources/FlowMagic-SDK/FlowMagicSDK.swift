@@ -34,9 +34,7 @@ public protocol ScreenFlowProviding {
     func getDestinationScreen(portName: String) -> any View
     func getScreens() -> [String: (view: AnyView, portNames: [String])]
     func getDestinationViewsFromPorts() -> [String: any View]
-    func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView)
-    func saveDestinationViewsFromPorts()
-    func updateDestinationScreenFromPorts(portName: String, destinationScreen: String)
+    func updateDestinationViewsFromPorts(portName: String, destinationScreen: String, destinationView: AnyView)
 }
 
 public class ScreenFlowProvider: ScreenFlowProviding {
@@ -49,7 +47,7 @@ public class ScreenFlowProvider: ScreenFlowProviding {
 
     public var screens: [String: (view: AnyView, portNames: [String])]
     public var destinationViewsFromPorts: [String: AnyView?] 
-    public var destinationScreensFromPorts: [String: String]
+//    public var destinationScreensFromPorts: [String: String]
 
     // MARK: - Initialization
 
@@ -57,7 +55,7 @@ public class ScreenFlowProvider: ScreenFlowProviding {
         self.errorHandle = errorHandle
         screens = [:]
         destinationViewsFromPorts = [:]
-        destinationScreensFromPorts = [:]
+//        destinationScreensFromPorts = [:]
     }
 
     // MARK: - Methods
@@ -66,7 +64,6 @@ public class ScreenFlowProvider: ScreenFlowProviding {
         guard screens[screenName] == nil else {
             return
         }
-
         screens[screenName] = (AnyView(view), portNames)
     }
 
@@ -78,11 +75,11 @@ public class ScreenFlowProvider: ScreenFlowProviding {
 
         let portName = fromPort + "." + toScreen
         destinationViewsFromPorts[portName] = view
-        destinationScreensFromPorts[portName] = toScreen
+        CoreDataViewModel.sharedCoreDataViewModel.addScreenFlow(source: portName, destination: toScreen)
     }
 
     public func getDestinationScreen(portName: String) -> any View {
-        updateScreenFlow()
+//        updateScreenFlow()
         return destinationViewsFromPorts[portName]
     }
 
@@ -91,31 +88,28 @@ public class ScreenFlowProvider: ScreenFlowProviding {
     }
 
     public func getDestinationViewsFromPorts() -> [String: any View] {
-        updateScreenFlow()
+//        updateScreenFlow()
         return destinationViewsFromPorts
     }
 
-    public func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView) {
+    public func updateDestinationViewsFromPorts(portName: String, destinationScreen: String, destinationView: AnyView) {
+        CoreDataViewModel.sharedCoreDataViewModel.updateScreenFlowEntity(source: portName, destination: destinationScreen)
         destinationViewsFromPorts[portName] = destinationView
     }
 
-    public func saveDestinationViewsFromPorts() {
-        UserDefaults.standard.set(destinationScreensFromPorts, forKey: userDefaultKey)
-    }
-    
-    public func updateDestinationScreenFromPorts(portName: String, destinationScreen: String){
-        destinationScreensFromPorts[portName] = destinationScreen
-        saveDestinationViewsFromPorts()
-    }
+//    public func updateDestinationScreenFromPorts(portName: String, destinationScreen: String){
+//        destinationScreensFromPorts[portName] = destinationScreen
+//        CoreDataViewModel.sharedCoreDataViewModel.updateScreenFlowEntity(source: portName, destination: destinationScreen)
+//    }
 
     public func updateScreenFlow() {
-        guard let newScreenFlow = UserDefaults.standard.object(forKey: userDefaultKey) as? [String: String] else {return}
-        for (portName, destinationScreen ) in newScreenFlow {
-            guard let view = screens[destinationScreen]?.view else {
+        let newScreenFlow = CoreDataViewModel.sharedCoreDataViewModel.fetchScreenFlows()
+        for entity in newScreenFlow {
+            guard let view = screens[entity.destinationScreen!]?.view else {
                 errorHandle.handleFatalError("Value of screen is nil")
                 return
             }
-            updateDestinationViewsFromPorts(portName: portName, destinationView: view)
+            updateDestinationViewsFromPorts(portName: entity.sourceScreen!, destinationScreen: entity.destinationScreen!, destinationView: view)
         }
     }
 

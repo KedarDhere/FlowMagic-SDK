@@ -129,7 +129,7 @@ final class FlowMagicSDKTests: XCTestCase {
 
         // When
         mockScreenFlowProvider.updateDestinationViewsFromPorts(
-            portName: "Home.SignUp",
+            portName: "Home.SignUp", destinationScreen: "Login",
             destinationView: AnyView(Login()))
 
         // Then
@@ -143,7 +143,7 @@ final class FlowMagicSDKTests: XCTestCase {
         // Given
         let mockErrorHandler = MockErrorHandler()
         let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
-        let viewModel = FlowMagicViewModel(service: MockWebService(), screenFlowProvider: mockScreenFlowProvider)
+        let viewModel = FlowMagicViewModel(service: MockWebService(), screenFlowProvider: mockScreenFlowProvider, coreDataViewModel: CoreDataViewModel(storeType: NSInMemoryStoreType))
 
         let homeScreen = "Home"
         let homeScreenPortNames = ["SignUp"]
@@ -217,4 +217,11 @@ final class FlowMagicSDKTests: XCTestCase {
         XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].portName, "Home.RandomPage")
         XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].destinationView, "RandomPage")
     }
+
+//    // Delete all the data
+//    func testDeleteData() {
+//        CoreDataViewModel.sharedCoreDataViewModel.deleteData()
+//        let savedScreenFlowEntity = CoreDataViewModel.sharedCoreDataViewModel.fetchScreenFlows()
+//        XCTAssertEqual(savedScreenFlowEntity.count, 0)
+//    }
 }

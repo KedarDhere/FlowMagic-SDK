@@ -10,7 +10,7 @@ import FlowMagic_SDK
 
 struct Home: View {
 
-    @StateObject private var viewModel = FlowMagicViewModel(service: WebServiceImpl(), screenFlowProvider: ScreenFlowProvider.shared)
+    @StateObject private var viewModel = FlowMagicViewModel(service: WebServiceImpl(), screenFlowProvider: ScreenFlowProvider.shared, coreDataViewModel: CoreDataViewModel.sharedCoreDataViewModel)
     var body: some View {
         NavigationView {
             VStack {

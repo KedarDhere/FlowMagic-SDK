@@ -13,4 +13,8 @@ struct Constants {
         static let baseUrl = "http://localhost:8000/"
         static let applicationScreenFlow = "\(baseUrl)applications/66ceb688-a2b3-11ed-a8fc-0242ac120002/screenFlow"
     }
+
+    struct Entities {
+        static let screenFlowEntity = "ScreenFlowEntity"
+    }
 }

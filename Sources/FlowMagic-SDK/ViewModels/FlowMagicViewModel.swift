@@ -13,14 +13,16 @@ public class FlowMagicViewModel: ObservableObject {
     // MARK: Properties
     private var service: WebService
     let screenFlowProvider: ScreenFlowProviding
-    
+    var coreDataViewModel: CoreDataViewModelProtocol
+
     @Published var destinationViewsFromPorts: [String: any View] = [:]
 
     // MARK: Initialization
   
-    public init(service: WebService, screenFlowProvider: ScreenFlowProviding) {
+    public init(service: WebService, screenFlowProvider: ScreenFlowProviding, coreDataViewModel: CoreDataViewModelProtocol ) {
         self.service = service
         self.screenFlowProvider = screenFlowProvider
+        self.coreDataViewModel = coreDataViewModel
     }
 
     // MARK: Methods
@@ -45,8 +47,8 @@ public class FlowMagicViewModel: ObservableObject {
             let screen = screens[screenInfo.destinationView]
             destinationView = screen!.0
             screenFlowProvider.updateDestinationViewsFromPorts(
-                                portName: screenInfo.portName, destinationView: destinationView)
-            screenFlowProvider.updateDestinationScreenFromPorts(portName: screenInfo.portName, destinationScreen: screenInfo.destinationView)
+                portName: screenInfo.portName, destinationScreen: screenInfo.destinationView, destinationView: destinationView)
+//            screenFlowProvider.updateDestinationScreenFromPorts(portName: screenInfo.portName, destinationScreen: screenInfo.destinationView)
         }
     }
 }
