@@ -105,25 +105,5 @@ public class ScreenFlowProvider: ScreenFlowProviding {
     public func getStorageProvider() -> StorageProvider {
         return storageProvider
     }
-
-//    public func saveDestinationViewsFromPorts() {
-//        UserDefaults.standard.set(destinationScreensFromPorts, forKey: userDefaultKey)
-//    }
     
-//    public func updateDestinationScreenFromPorts(portName: String, destinationScreen: String){
-//        destinationScreensFromPorts[portName] = destinationScreen
-//        saveDestinationViewsFromPorts()
-//    }
-
-//    public func updateScreenFlow() {
-//        guard let newScreenFlow = UserDefaults.standard.object(forKey: userDefaultKey) as? [String: String] else {return}
-//        for (portName, destinationScreen ) in newScreenFlow {
-//            guard let view = screens[destinationScreen]?.view else {
-//                errorHandle.handleFatalError("Value of screen is nil")
-//                return
-//            }
-//            updateDestinationViewsFromPorts(portName: portName, destinationView: view)
-//        }
-//    }
-
 }

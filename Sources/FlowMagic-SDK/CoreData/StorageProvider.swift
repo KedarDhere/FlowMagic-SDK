@@ -38,14 +38,7 @@ extension StorageProvider {
 
     func updateScreenFlow(source: String, destination: String) {
         let savedScreenFlow = getScreenFlow(source: source, destination: destination)
-
-//        if savedScreenFlow.isEmpty {
-//            let screenFlow = ScreenFlow(context: persistentContainer.viewContext)
-//            screenFlow.sourceScreen = source
-//            screenFlow.destinationScreen = destination
-//        } else {
-            savedScreenFlow.first?.destinationScreen = destination
-//        }
+        savedScreenFlow.first?.destinationScreen = destination
 
         do {
             try persistentContainer.viewContext.save()
