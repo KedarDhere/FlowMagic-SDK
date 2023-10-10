@@ -33,7 +33,7 @@ public class FlowMagicViewModel: ObservableObject {
             renderDestinationView(screenFlowModel: screenFlowModel)
             destinationViewsFromPorts = screenFlowProvider.getDestinationViewsFromPorts()
         } catch {
-            screenFlowProvider.getStorageProvider().fetchAndUpdate()
+            screenFlowProvider.getStorageProvider().fetchAndUpdate(screenFlowProvider: screenFlowProvider)
             print(error)
         }
 

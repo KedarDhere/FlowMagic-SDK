@@ -9,11 +9,22 @@ import Foundation
 import SwiftUI
 import CoreData
 
+enum StoreType {
+    case inMemory, persisted
+}
+
 public class StorageProvider {
     let persistentContainer: NSPersistentContainer
 
-    init() {
-        persistentContainer = NSPersistentContainer(name: "Model")
+    init(storeType: StoreType = .persisted) {
+        let modelURL = Bundle.module.url(forResource: "Model", withExtension: "momd")!
+        let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)!
+
+        persistentContainer = NSPersistentContainer(name: "Model", managedObjectModel: managedObjectModel)
+
+        if storeType == .inMemory {
+            persistentContainer.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
 
         persistentContainer.loadPersistentStores(completionHandler: { description, error in
             if let error = error {
@@ -33,7 +44,7 @@ extension StorageProvider {
 //            screenFlow.sourceScreen = source
 //            screenFlow.destinationScreen = destination
 //        } else {
-            savedScreenFlow.first?.sourceScreen = destination
+            savedScreenFlow.first?.destinationScreen = destination
 //        }
 
         do {
@@ -78,15 +89,14 @@ extension StorageProvider {
     }
 
     /// Update the destinationViewsFromPorts as per the latest changes in the CoreData
-    func fetchAndUpdate() {
+    func fetchAndUpdate(screenFlowProvider: ScreenFlowProviding) {
         let updatedScreenFlow = getAllScreenFlows()
-//        var localScreenFlow = ScreenFlowProvider.shared.getDestinationViewsFromPorts()
-        let screens = ScreenFlowProvider.shared.getScreens()
+        let screens = screenFlowProvider.getScreens()
 
         for entity in updatedScreenFlow {
-            var screenInfo = screens[entity.destinationScreen!]
-            var destinationView: AnyView = screenInfo!.0
-            ScreenFlowProvider.shared.updateDestinationViewsFromPorts(portName: entity.sourceScreen!, destinationView: destinationView, destinationScreenName: entity.destinationScreen!)
+            let screenInfo = screens[entity.destinationScreen!]
+            let destinationView: AnyView = screenInfo!.0
+            screenFlowProvider.updateDestinationViewsFromPorts(portName: entity.sourceScreen!, destinationView: destinationView, destinationScreenName: entity.destinationScreen!)
         }
     }
 

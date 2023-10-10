@@ -18,7 +18,7 @@ final class FlowMagicSDKTests: XCTestCase {
     func testRegisterScreens() {
         // Given
         let mockErrorHandler = MockErrorHandler()
-        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider())
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider(storeType: .inMemory))
         let screenName = "Home"
         let portNames = ["Login", "SignUp"]
         let view = AnyView(Home())
@@ -37,7 +37,7 @@ final class FlowMagicSDKTests: XCTestCase {
     func testOverwriteScreen() {
         // Given
         let mockErrorHandler = MockErrorHandler()
-        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider())
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider(storeType: .inMemory))
         let screenName = "Home"
         let initialPortNames = ["Login", "SignUp"]
         let overwrittenPortNames = ["Login", "SignUp", "AnotherPage"]
@@ -59,7 +59,7 @@ final class FlowMagicSDKTests: XCTestCase {
     func testAddConnections() {
         // Given
         let mockErrorHandler = MockErrorHandler()
-        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider())
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider(storeType: .inMemory))
         let homeScreen = "Home"
         let homeScreenPortNames = ["Login", "SignUp"]
         let home = AnyView(Home())
@@ -86,7 +86,7 @@ final class FlowMagicSDKTests: XCTestCase {
     func testAddConnectionWithNoRegistration() {
         // Given
         let mockErrorHandler = MockErrorHandler()
-        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider())
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider(storeType: .inMemory))
         let homeScreen = "Home"
         let homeScreenPortNames = ["Login", "SignUp"]
         let home = AnyView(Home())
@@ -106,7 +106,7 @@ final class FlowMagicSDKTests: XCTestCase {
     func testUpdateScreenFlow() {
         // Given
         let mockErrorHandler = MockErrorHandler()
-        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider())
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider(storeType: .inMemory))
         let homeScreen = "Home"
         let homeScreenPortNames = ["SignUp"]
         let homeView = AnyView(Home())
@@ -142,7 +142,7 @@ final class FlowMagicSDKTests: XCTestCase {
     @MainActor func testViewModel() async {
         // Given
         let mockErrorHandler = MockErrorHandler()
-        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider())
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider(storeType: .inMemory))
         let viewModel = FlowMagicViewModel(service: MockWebService(), screenFlowProvider: mockScreenFlowProvider)
 
         let homeScreen = "Home"
@@ -163,8 +163,7 @@ final class FlowMagicSDKTests: XCTestCase {
         mockScreenFlowProvider.registerScreen(screenName: loginScreen, portNames: loginScrPortNames, view: loginView)
 
         mockScreenFlowProvider.addConnection(fromPort: homeScreen, toScreen: signUpScreen)
-        mockScreenFlowProvider.registerScreen(screenName: loginScreen, portNames: [], view: Login())
-        mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: [], view: SignUp())
+
 
         // When
         await viewModel.load()
@@ -216,5 +215,115 @@ final class FlowMagicSDKTests: XCTestCase {
         XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].screenName, "Home")
         XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].portName, "Home.RandomPage")
         XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].destinationView, "RandomPage")
+    }
+
+    func testCoreDataFetch() {
+        //Given
+        let storage = StorageProvider(storeType: .inMemory)
+
+        // When
+        storage.addScreenFlow(source: "Home.SignUp", destination: "Login")
+        storage.addScreenFlow(source: "Home.Login", destination: "SignUp")
+        let savedData = storage.getAllScreenFlows()
+
+        // Then
+        XCTAssertEqual(savedData.count, 2)
+        XCTAssertEqual(savedData.first!.sourceScreen, "Home.SignUp")
+        XCTAssertEqual(savedData.first!.destinationScreen, "Login")
+    }
+
+    func testCoreDataFetchPredicate() {
+        //Given
+        let storage = StorageProvider(storeType: .inMemory)
+
+        // When
+        storage.addScreenFlow(source: "Home.SignUp", destination: "Login")
+        storage.updateScreenFlow(source: "Home.SignUp", destination: "RandomPage")
+        let retrivedData = storage.getScreenFlow(source: "Home.SignUp", destination: "RandomPage")
+
+        // Then
+        XCTAssertEqual(retrivedData.count, 1)
+        XCTAssertEqual(retrivedData.first!.sourceScreen, "Home.SignUp")
+        XCTAssertEqual(retrivedData.first!.destinationScreen, "RandomPage")
+    }
+
+    func testFailureCoreDataFetchPredicate() {
+        //Given
+        let storage = StorageProvider(storeType: .inMemory)
+
+        // When
+        storage.addScreenFlow(source: "Home.SignUp", destination: "Login")
+        storage.updateScreenFlow(source: "Home.SignUp", destination: "RandomPage")
+        let retrivedData = storage.getScreenFlow(source: "Home.Login", destination: "RandomPage")
+
+        // Then
+        XCTAssertEqual(retrivedData.count, 0)
+    }
+
+    func testCoreDataUpdation() {
+        // Given
+        let storage = StorageProvider(storeType: .inMemory)
+
+        // When
+        storage.addScreenFlow(source: "Home.SignUp", destination: "Login")
+        storage.updateScreenFlow(source: "Home.SignUp", destination: "RandomPage")
+        let savedData = storage.getAllScreenFlows()
+
+        // Then
+        XCTAssertEqual(savedData.count, 1)
+        XCTAssertEqual(savedData.first!.sourceScreen, "Home.SignUp")
+        XCTAssertEqual(savedData.first!.destinationScreen, "RandomPage")
+    }
+
+    func testSaveData() {
+        // Given
+        let storage = StorageProvider(storeType: .inMemory)
+
+        // When
+        storage.addScreenFlow(source: "Home.SignUp", destination: "Login")
+        storage.updateScreenFlow(source: "Home.SignUp", destination: "RandomPage")
+        storage.saveScreenFlow()
+        let savedData = storage.getAllScreenFlows()
+
+        // Then
+        XCTAssertEqual(savedData.count, 1)
+        XCTAssertEqual(savedData.first!.sourceScreen, "Home.SignUp")
+        XCTAssertEqual(savedData.first!.destinationScreen, "RandomPage")
+
+    }
+
+    func testFetchAndUpdate() {
+        // Given
+        let storage = StorageProvider(storeType: .inMemory)
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: storage)
+
+        let homeScreen = "Home"
+        let homeScreenPortNames = ["SignUp", "Login"]
+        let homeView = AnyView(Home())
+
+        let signUpScreen = "SignUp"
+        let signUpScrPortNames = [String()]
+        let signUpView = AnyView(SignUp())
+
+        let loginScreen = "Login"
+        let loginScrPortNames = [String()]
+        let loginView = AnyView(Login())
+
+        // When
+        // Register Home and Sign Up screens
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScreenPortNames, view: homeView)
+        mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: signUpScrPortNames, view: signUpView)
+        mockScreenFlowProvider.registerScreen(screenName: loginScreen, portNames: loginScrPortNames, view: loginView)
+
+        storage.addScreenFlow(source: "Home.SignUp", destination: "SignUp")
+        storage.addScreenFlow(source: "Home.Login", destination: "Login")
+        storage.updateScreenFlow(source: "Home.SignUp", destination: "SignUp")
+        storage.fetchAndUpdate(screenFlowProvider: mockScreenFlowProvider)
+
+        //Then
+        let expectedOutput = mockScreenFlowProvider.getDestinationScreen(portName: "Home.SignUp")
+        let actualOutput = AnyView(SignUp())
+        XCTAssertTrue(propertiesAreEqual(expectedOutput, actualOutput))
     }
 }
