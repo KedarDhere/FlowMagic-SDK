@@ -18,7 +18,7 @@ final class FlowMagicSDKTests: XCTestCase {
     func testRegisterScreens() {
         // Given
         let mockErrorHandler = MockErrorHandler()
-        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider())
         let screenName = "Home"
         let portNames = ["Login", "SignUp"]
         let view = AnyView(Home())
@@ -37,7 +37,7 @@ final class FlowMagicSDKTests: XCTestCase {
     func testOverwriteScreen() {
         // Given
         let mockErrorHandler = MockErrorHandler()
-        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider())
         let screenName = "Home"
         let initialPortNames = ["Login", "SignUp"]
         let overwrittenPortNames = ["Login", "SignUp", "AnotherPage"]
@@ -59,7 +59,7 @@ final class FlowMagicSDKTests: XCTestCase {
     func testAddConnections() {
         // Given
         let mockErrorHandler = MockErrorHandler()
-        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider())
         let homeScreen = "Home"
         let homeScreenPortNames = ["Login", "SignUp"]
         let home = AnyView(Home())
@@ -86,7 +86,7 @@ final class FlowMagicSDKTests: XCTestCase {
     func testAddConnectionWithNoRegistration() {
         // Given
         let mockErrorHandler = MockErrorHandler()
-        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider())
         let homeScreen = "Home"
         let homeScreenPortNames = ["Login", "SignUp"]
         let home = AnyView(Home())
@@ -106,7 +106,7 @@ final class FlowMagicSDKTests: XCTestCase {
     func testUpdateScreenFlow() {
         // Given
         let mockErrorHandler = MockErrorHandler()
-        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider())
         let homeScreen = "Home"
         let homeScreenPortNames = ["SignUp"]
         let homeView = AnyView(Home())
@@ -130,7 +130,7 @@ final class FlowMagicSDKTests: XCTestCase {
         // When
         mockScreenFlowProvider.updateDestinationViewsFromPorts(
             portName: "Home.SignUp",
-            destinationView: AnyView(Login()))
+            destinationView: AnyView(Login()), destinationScreenName: "Login")
 
         // Then
         let expectedOutput = mockScreenFlowProvider.getDestinationScreen(portName: "Home.SignUp")
@@ -142,7 +142,7 @@ final class FlowMagicSDKTests: XCTestCase {
     @MainActor func testViewModel() async {
         // Given
         let mockErrorHandler = MockErrorHandler()
-        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler)
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: StorageProvider())
         let viewModel = FlowMagicViewModel(service: MockWebService(), screenFlowProvider: mockScreenFlowProvider)
 
         let homeScreen = "Home"

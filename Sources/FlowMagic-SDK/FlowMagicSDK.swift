@@ -34,30 +34,31 @@ public protocol ScreenFlowProviding {
     func getDestinationScreen(portName: String) -> any View
     func getScreens() -> [String: (view: AnyView, portNames: [String])]
     func getDestinationViewsFromPorts() -> [String: any View]
-    func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView)
-    func saveDestinationViewsFromPorts()
-    func updateDestinationScreenFromPorts(portName: String, destinationScreen: String)
+    func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView, destinationScreenName: String)
+    func getStorageProvider() -> StorageProvider
+//    func saveDestinationViewsFromPorts()
+//    func updateDestinationScreenFromPorts(portName: String, destinationScreen: String)
 }
 
 public class ScreenFlowProvider: ScreenFlowProviding {
 
-    public static var shared = ScreenFlowProvider(errorHandle: ProductionHandleFatalError())
+    public static var shared = ScreenFlowProvider(errorHandle: ProductionHandleFatalError(), storageProvider: StorageProvider())
     let errorHandle: ErrorHandlerProtocol
     let userDefaultKey: String = "screenFlow"
+    let storageProvider: StorageProvider
 
     // MARK: - Properties
 
     public var screens: [String: (view: AnyView, portNames: [String])]
-    public var destinationViewsFromPorts: [String: AnyView?] 
-    public var destinationScreensFromPorts: [String: String]
+    public var destinationViewsFromPorts: [String: AnyView?]
 
     // MARK: - Initialization
 
-    public init(errorHandle: ErrorHandlerProtocol) {
+    public init(errorHandle: ErrorHandlerProtocol, storageProvider: StorageProvider) {
         self.errorHandle = errorHandle
         screens = [:]
         destinationViewsFromPorts = [:]
-        destinationScreensFromPorts = [:]
+        self.storageProvider = storageProvider
     }
 
     // MARK: - Methods
@@ -78,11 +79,10 @@ public class ScreenFlowProvider: ScreenFlowProviding {
 
         let portName = fromPort + "." + toScreen
         destinationViewsFromPorts[portName] = view
-        destinationScreensFromPorts[portName] = toScreen
+        storageProvider.addScreenFlow(source: portName, destination: toScreen)
     }
 
     public func getDestinationScreen(portName: String) -> any View {
-        updateScreenFlow()
         return destinationViewsFromPorts[portName]
     }
 
@@ -91,32 +91,39 @@ public class ScreenFlowProvider: ScreenFlowProviding {
     }
 
     public func getDestinationViewsFromPorts() -> [String: any View] {
-        updateScreenFlow()
         return destinationViewsFromPorts
     }
 
-    public func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView) {
+    public func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView, destinationScreenName: String) {
+        let savedScreenFlow = storageProvider.getScreenFlow(source: portName, destination: destinationScreenName)
+        if savedScreenFlow.first?.destinationScreen != destinationScreenName {
+            storageProvider.updateScreenFlow(source: portName, destination: destinationScreenName)
+        }
         destinationViewsFromPorts[portName] = destinationView
     }
 
-    public func saveDestinationViewsFromPorts() {
-        UserDefaults.standard.set(destinationScreensFromPorts, forKey: userDefaultKey)
-    }
-    
-    public func updateDestinationScreenFromPorts(portName: String, destinationScreen: String){
-        destinationScreensFromPorts[portName] = destinationScreen
-        saveDestinationViewsFromPorts()
+    public func getStorageProvider() -> StorageProvider {
+        return storageProvider
     }
 
-    public func updateScreenFlow() {
-        guard let newScreenFlow = UserDefaults.standard.object(forKey: userDefaultKey) as? [String: String] else {return}
-        for (portName, destinationScreen ) in newScreenFlow {
-            guard let view = screens[destinationScreen]?.view else {
-                errorHandle.handleFatalError("Value of screen is nil")
-                return
-            }
-            updateDestinationViewsFromPorts(portName: portName, destinationView: view)
-        }
-    }
+//    public func saveDestinationViewsFromPorts() {
+//        UserDefaults.standard.set(destinationScreensFromPorts, forKey: userDefaultKey)
+//    }
+    
+//    public func updateDestinationScreenFromPorts(portName: String, destinationScreen: String){
+//        destinationScreensFromPorts[portName] = destinationScreen
+//        saveDestinationViewsFromPorts()
+//    }
+
+//    public func updateScreenFlow() {
+//        guard let newScreenFlow = UserDefaults.standard.object(forKey: userDefaultKey) as? [String: String] else {return}
+//        for (portName, destinationScreen ) in newScreenFlow {
+//            guard let view = screens[destinationScreen]?.view else {
+//                errorHandle.handleFatalError("Value of screen is nil")
+//                return
+//            }
+//            updateDestinationViewsFromPorts(portName: portName, destinationView: view)
+//        }
+//    }
 
 }

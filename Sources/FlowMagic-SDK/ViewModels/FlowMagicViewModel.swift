@@ -33,6 +33,7 @@ public class FlowMagicViewModel: ObservableObject {
             renderDestinationView(screenFlowModel: screenFlowModel)
             destinationViewsFromPorts = screenFlowProvider.getDestinationViewsFromPorts()
         } catch {
+            screenFlowProvider.getStorageProvider().fetchAndUpdate()
             print(error)
         }
 
@@ -45,8 +46,8 @@ public class FlowMagicViewModel: ObservableObject {
             let screen = screens[screenInfo.destinationView]
             destinationView = screen!.0
             screenFlowProvider.updateDestinationViewsFromPorts(
-                                portName: screenInfo.portName, destinationView: destinationView)
-            screenFlowProvider.updateDestinationScreenFromPorts(portName: screenInfo.portName, destinationScreen: screenInfo.destinationView)
+                portName: screenInfo.portName, destinationView: destinationView, destinationScreenName: screenInfo.destinationView )
+//            screenFlowProvider.updateDestinationScreenFromPorts(portName: screenInfo.portName, destinationScreen: screenInfo.destinationView)
         }
     }
 }
