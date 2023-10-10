@@ -1,6 +1,7 @@
 import XCTest
 import SwiftUI
 @testable import FlowMagic_SDK
+import CoreData
 
 func propertiesAreEqual(_ lhs: Any?, _ rhs: Any?) -> Bool {
     switch (lhs, rhs) {
