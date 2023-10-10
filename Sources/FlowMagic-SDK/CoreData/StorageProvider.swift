@@ -21,3 +21,39 @@ class StorageProvider {
         })
     }
 }
+
+extension StorageProvider {
+
+    func updateScreenFlow(source: String, destination: String) {
+        let screenFlow = ScreenFlow(context: persistentContainer.viewContext)
+        screenFlow.sourceScreen = source
+        screenFlow.destinationScreen = destination
+
+        do {
+            try persistentContainer.viewContext.save()
+            print("Screen Flow saved successfully")
+        } catch {
+            print("Failed to save screenFlow: \(error)")
+        }
+    }
+
+    func getAllScreenFlows() -> [ScreenFlow] {
+        let fetchRequest: NSFetchRequest<ScreenFlow> = ScreenFlow.fetchRequest()
+
+        do {
+            return try persistentContainer.viewContext.fetch(fetchRequest)
+        } catch {
+            print("Failed to fetch screenFlows: \(error)")
+            return []
+        }
+    }
+
+    func saveScreenFlow() {
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            persistentContainer.viewContext.rollback()
+            print("Failed to save context: \(error)")
+        }
+    }
+}
