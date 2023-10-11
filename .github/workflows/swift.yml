@@ -5,9 +5,9 @@ name: Swift
 
 on:
   push:
-    branches: [ "main", "mock-server-integration" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "mock-server-integration" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -19,4 +19,4 @@ jobs:
     - name: Build
       run: swift build -v
     - name: Run tests
-      run: swift test -v
+      run: xcodebuild test -scheme FlowMagic-SDK -destination "OS=15.0,name=iPhone 13 Mini"
