@@ -19,4 +19,4 @@ jobs:
     - name: Build
       run: swift build -v
     - name: Run tests
-      run: xcodebuild test -scheme FlowMagic-SDK -destination "OS=15.0,name=iPhone 13 Mini"
+      run: xcodebuild test -scheme FlowMagic-SDK -destination "OS=16.2,name=iPhone 13 Mini"
