@@ -36,8 +36,6 @@ public protocol ScreenFlowProviding {
     func getDestinationViewsFromPorts() -> [String: any View]
     func updateDestinationViewsFromPorts(portName: String, destinationView: AnyView, destinationScreenName: String)
     func getStorageProvider() -> StorageProvider
-//    func saveDestinationViewsFromPorts()
-//    func updateDestinationScreenFromPorts(portName: String, destinationScreen: String)
 }
 
 public class ScreenFlowProvider: ScreenFlowProviding {

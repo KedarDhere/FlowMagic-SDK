@@ -36,18 +36,14 @@ public class StorageProvider {
 
 extension StorageProvider {
 
+    /// Update the screenFlow in CoreData
     func updateScreenFlow(source: String, destination: String) {
         let savedScreenFlow = getScreenFlow(source: source, destination: destination)
         savedScreenFlow.first?.destinationScreen = destination
-
-        do {
-            try persistentContainer.viewContext.save()
-            print("Screen Flow saved successfully")
-        } catch {
-            print("Failed to save screenFlow: \(error)")
-        }
+        saveScreenFlow()
     }
 
+    /// Retrieve all saved data from CoreData
     func getAllScreenFlows() -> [ScreenFlow] {
         let fetchRequest: NSFetchRequest<ScreenFlow> = ScreenFlow.fetchRequest()
 
@@ -59,6 +55,7 @@ extension StorageProvider {
         }
     }
 
+    /// Save the screenFlow to CoreData
     func saveScreenFlow() {
         do {
             try persistentContainer.viewContext.save()
@@ -68,6 +65,7 @@ extension StorageProvider {
         }
     }
 
+    /// Return the screenFlow for the specified sourceScreen
     func getScreenFlow(source: String, destination: String) -> [ScreenFlow]{
         let fetchRequest: NSFetchRequest<ScreenFlow> = ScreenFlow.fetchRequest()
         let predicate: NSPredicate = NSPredicate(format: "sourceScreen == %@", source)
@@ -81,7 +79,7 @@ extension StorageProvider {
         }
     }
 
-    /// Update the destinationViewsFromPorts as per the latest changes in the CoreData
+    /// Update the destinationViewsFromPorts based on the latest changes in CoreData
     func fetchAndUpdate(screenFlowProvider: ScreenFlowProviding) {
         let updatedScreenFlow = getAllScreenFlows()
         let screens = screenFlowProvider.getScreens()
@@ -93,7 +91,8 @@ extension StorageProvider {
         }
     }
 
-    /// The following method will call only once
+    /// Add newScreen Flow to CoreData
+    /// This method will be called only once.
     func addScreenFlow(source: String, destination: String) {
         let savedScreenFlow = getScreenFlow(source: source, destination: destination)
 
@@ -102,12 +101,6 @@ extension StorageProvider {
             screenFlow.sourceScreen = source
             screenFlow.destinationScreen = destination
         }
-
-        do {
-            try persistentContainer.viewContext.save()
-            print("Screen Flow saved successfully")
-        } catch {
-            print("Failed to save screenFlow: \(error)")
-        }
+        saveScreenFlow()
     }
 }
