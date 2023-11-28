@@ -23,7 +23,7 @@ extension URLSession: NetworkSession {
     }
 }
 
-public class MockNetworkSession: NetworkSession {
+class MockNetworkSession: NetworkSession {
     var mockData: Data?
     var mockResponse: HTTPURLResponse?
     var mockError: Error?
