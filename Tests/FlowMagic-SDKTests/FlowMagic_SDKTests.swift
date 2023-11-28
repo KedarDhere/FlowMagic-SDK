@@ -327,4 +327,136 @@ final class FlowMagicSDKTests: XCTestCase {
         let actualOutput = AnyView(SignUp())
         XCTAssertTrue(propertiesAreEqual(expectedOutput, actualOutput))
     }
+
+    // Test correct retrival of the Core Data container
+    func testGetStorageProvider() {
+        // Given
+        let storage = StorageProvider(storeType: .inMemory)
+        let mockErrorHandler = MockErrorHandler()
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: storage)
+
+        let homeScreen = "Home"
+        let homeScreenPortNames = ["SignUp", "Login"]
+        let homeView = AnyView(Home())
+
+        // When
+        // Register Home and Sign Up screens
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScreenPortNames, view: homeView)
+
+        storage.addScreenFlow(source: "Home.SignUp", destination: "SignUp")
+        storage.addScreenFlow(source: "Home.Login", destination: "Login")
+
+        let returnedStorage = mockScreenFlowProvider.getStorageProvider()
+
+
+        //Then
+        let expectedOutput = returnedStorage.getAllScreenFlows()
+        let actualOutput = storage.getAllScreenFlows()
+        XCTAssertEqual(expectedOutput, actualOutput)
+    }
+
+    func testErrorResponse() async throws {
+        // Given
+        let mockSession = MockNetworkSession()
+        let service = WebServiceImpl(networkSession: mockSession)
+        let jsonData = """
+        {
+            "applicationId": "66ceb688a2b311eda8fc0242ac120002",
+            "applicationScreenFlow": [
+                {
+                    "screenName": "Home",
+                    "portName": "Home.RandomPage",
+                    "destinationView": "RandomPage"
+                },
+                {
+                    "screenName": "Login",
+                    "portName": "Home.Login",
+                    "destinationView": "SignUp"
+                },
+                {
+                    "screenName": "SignUp",
+                    "portName": "Home.SignUp",
+                    "destinationView": "RandomPage"
+                }
+            ]
+        }
+        """.data(using: .utf8)!
+
+        let mockURL = URL(string: "http://test.com")!
+        let mockResponse = HTTPURLResponse(url: mockURL, statusCode: 500, httpVersion: nil, headerFields: nil)!
+        mockSession.mockData = jsonData
+        mockSession.mockResponse = mockResponse
+
+        do {
+        // When
+            let _ = try await service.loadUrlData(resource: "http://test.com")
+            XCTFail("loadUrlData should have thrown an error for invalid server response")
+        } catch {
+        // Then
+            XCTAssertEqual(error as? NetworkError, NetworkError.invalidServerResponse)
+        }
+    }
+
+    func testInvalidURL() async {
+        // Given
+        let mockSession = MockNetworkSession()
+        let service = WebServiceImpl(networkSession: mockSession)
+        let invalidUrlString = "1"
+
+        do {
+        // When
+            let _ = try await service.loadUrlData(resource: invalidUrlString)
+            XCTFail("loadUrlData should have thrown an error for invalid server response")
+        } catch {
+        // Then
+            XCTAssertEqual(error as? NetworkError, NetworkError.invalidUrl)
+        }
+    }
+
+    // Tests that data is retrieved from the Core Data container when the application is offline
+    @MainActor func testOfflineWorking() async {
+        // Given
+        let mockErrorHandler = MockErrorHandler()
+        let storage = StorageProvider(storeType: .inMemory)
+        let mockScreenFlowProvider = ScreenFlowProvider(errorHandle: mockErrorHandler, storageProvider: storage)
+
+        let mockSession = MockNetworkSession()
+        let service = WebServiceImpl(networkSession: mockSession)
+
+        let viewModel = FlowMagicViewModel(service: service, screenFlowProvider: mockScreenFlowProvider)
+
+        let homeScreen = "Home"
+        let homeScreenPortNames = ["SignUp"]
+        let homeView = AnyView(Home())
+
+        let signUpScreen = "SignUp"
+        let signUpScrPortNames = [String()]
+        let signUpView = AnyView(SignUp())
+
+        let loginScreen = "Login"
+        let loginScrPortNames = [String()]
+        let loginView = AnyView(Login())
+
+        // When
+        // Register Home and Sign Up screens
+        mockScreenFlowProvider.registerScreen(screenName: homeScreen, portNames: homeScreenPortNames, view: homeView)
+        mockScreenFlowProvider.registerScreen(screenName: signUpScreen, portNames: signUpScrPortNames, view: signUpView)
+        mockScreenFlowProvider.registerScreen(screenName: loginScreen, portNames: loginScrPortNames, view: loginView)
+
+        storage.addScreenFlow(source: "Home.SignUp", destination: "SignUp")
+        storage.addScreenFlow(source: "Home.Login", destination: "Login")
+        storage.updateScreenFlow(source: "Home.SignUp", destination: "SignUp")
+        storage.fetchAndUpdate(screenFlowProvider: mockScreenFlowProvider)
+
+        // When
+        storage.updateScreenFlow(source: "Home.SignUp", destination: "Login")
+        storage.fetchAndUpdate(screenFlowProvider: mockScreenFlowProvider)
+        await viewModel.load()
+
+        // Then
+        let expectedOutput = mockScreenFlowProvider.getDestinationScreen(portName: "Home.SignUp")
+        let actualOutput = AnyView(Login())
+        XCTAssertTrue(propertiesAreEqual(expectedOutput, actualOutput))
+    }
+
 }
