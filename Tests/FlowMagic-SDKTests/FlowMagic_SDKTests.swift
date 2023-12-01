@@ -18,7 +18,7 @@ let loginScrPortNames = [String()]
 let jsonData = """
 {
     "id": "66ceb688a2b311eda8fc0242ac120002",
-    "applicationScreenFlow": [
+    "screenFlow": [
         {
             "screenName": "Home",
             "portName": "Home.RandomPage",
@@ -204,9 +204,9 @@ final class FlowMagicSDKTests: XCTestCase {
 
         // Then
         XCTAssertEqual(screenFlowModel.id, "66ceb688a2b311eda8fc0242ac120002")
-        XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].screenName, "Home")
-        XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].portName, "Home.RandomPage")
-        XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].destinationView, "RandomPage")
+        XCTAssertEqual(screenFlowModel.screenFlow[0].screenName, "Home")
+        XCTAssertEqual(screenFlowModel.screenFlow[0].portName, "Home.RandomPage")
+        XCTAssertEqual(screenFlowModel.screenFlow[0].destinationView, "RandomPage")
     }
 
     func testCoreDataFetch() {

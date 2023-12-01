@@ -13,7 +13,7 @@ class MockWebService: WebService {
         let mockScreenFlowData = """
         {
             "id": "66ceb688a2b311eda8fc0242ac120002",
-            "applicationScreenFlow": [
+            "screenFlow": [
               {
                 "screenName": "Login",
                 "portName": "Home.Login",

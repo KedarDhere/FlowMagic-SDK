@@ -43,7 +43,7 @@ public class FlowMagicViewModel: ObservableObject {
     public func renderDestinationView(screenFlowModel: ScreenFlowModel) {
         var destinationView: AnyView = ProgressView().toAnyView()
         let screens = screenFlowProvider.getScreens()
-        for screenInfo in screenFlowModel.applicationScreenFlow {
+        for screenInfo in screenFlowModel.screenFlow {
             let screen = screens[screenInfo.destinationView]
             destinationView = screen!.0
             screenFlowProvider.updateDestinationViewsFromPorts(
