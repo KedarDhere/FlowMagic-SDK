@@ -17,7 +17,7 @@ let loginScrPortNames = [String()]
 
 let jsonData = """
 {
-    "applicationId": "66ceb688a2b311eda8fc0242ac120002",
+    "id": "66ceb688a2b311eda8fc0242ac120002",
     "applicationScreenFlow": [
         {
             "screenName": "Home",
@@ -203,7 +203,7 @@ final class FlowMagicSDKTests: XCTestCase {
         let screenFlowModel = try await service.loadUrlData(resource: "http://test.com")
 
         // Then
-        XCTAssertEqual(screenFlowModel.applicationId, "66ceb688a2b311eda8fc0242ac120002")
+        XCTAssertEqual(screenFlowModel.id, "66ceb688a2b311eda8fc0242ac120002")
         XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].screenName, "Home")
         XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].portName, "Home.RandomPage")
         XCTAssertEqual(screenFlowModel.applicationScreenFlow[0].destinationView, "RandomPage")

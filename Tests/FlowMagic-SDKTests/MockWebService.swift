@@ -12,7 +12,7 @@ class MockWebService: WebService {
     func loadUrlData(resource: String) async throws -> ScreenFlowModel {
         let mockScreenFlowData = """
         {
-            "applicationId": "66ceb688a2b311eda8fc0242ac120002",
+            "id": "66ceb688a2b311eda8fc0242ac120002",
             "applicationScreenFlow": [
               {
                 "screenName": "Login",
