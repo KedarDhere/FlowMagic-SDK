@@ -21,6 +21,6 @@ public struct ApplicationScreenFlowModel: Codable {
 }
 
 public struct ScreenFlowModel: Codable {
-    let applicationId: String
-    let applicationScreenFlow: [ApplicationScreenFlowModel]
+    let id: String
+    let screenFlow: [ApplicationScreenFlowModel]
 }
